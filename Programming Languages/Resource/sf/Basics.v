@@ -235,19 +235,26 @@ Proof. reflexivity.  Qed.
     its inputs are [false]. *)
 
 Definition nandb (b1:bool) (b2:bool) : bool :=
-  (* FILL IN HERE *) admit.
+  match b1 with
+  | false => true
+  | true =>
+    match b2 with
+    | false => true
+    | true => false
+    end
+end.
 
 (** Remove "[Admitted.]" and fill in each proof with 
     "[Proof. reflexivity. Qed.]" *)
 
 Example test_nandb1:               (nandb true false) = true.
-(* FILL IN HERE *) Admitted.
+Proof. reflexivity. Qed.
 Example test_nandb2:               (nandb false false) = true.
-(* FILL IN HERE *) Admitted.
+Proof. reflexivity. Qed.
 Example test_nandb3:               (nandb false true) = true.
-(* FILL IN HERE *) Admitted.
+Proof. reflexivity. Qed.
 Example test_nandb4:               (nandb true true) = false.
-(* FILL IN HERE *) Admitted.
+Proof. reflexivity. Qed.
 (** [] *)
 
 (** **** Exercise: 1 star (andb3)  *)
@@ -256,16 +263,27 @@ Example test_nandb4:               (nandb true true) = false.
     otherwise. *)
 
 Definition andb3 (b1:bool) (b2:bool) (b3:bool) : bool :=
-  (* FILL IN HERE *) admit.
+  match b1 with
+  | false => false
+  | true =>
+    match b2 with
+    | false => false
+    | true =>
+      match b3 with
+      | false => false
+      | true => true
+      end
+    end
+end.
 
 Example test_andb31:                 (andb3 true true true) = true.
-(* FILL IN HERE *) Admitted.
+Proof. reflexivity. Qed.
 Example test_andb32:                 (andb3 false true true) = false.
-(* FILL IN HERE *) Admitted.
+Proof. reflexivity. Qed.
 Example test_andb33:                 (andb3 true false true) = false.
-(* FILL IN HERE *) Admitted.
+Proof. reflexivity. Qed.
 Example test_andb34:                 (andb3 true true false) = false.
-(* FILL IN HERE *) Admitted.
+Proof. reflexivity. Qed.
 (** [] *)
 
 (* ###################################################################### *)
@@ -490,12 +508,15 @@ Fixpoint exp (base power : nat) : nat :=
     Translate this into Coq. *)
 
 Fixpoint factorial (n:nat) : nat := 
-(* FILL IN HERE *) admit.
+  match n with
+  | O => S O
+  | S n' => mult n (factorial n')
+  end.
 
 Example test_factorial1:          (factorial 3) = 6.
-(* FILL IN HERE *) Admitted.
+Proof. reflexivity. Qed.
 Example test_factorial2:          (factorial 5) = (mult 10 12).
-(* FILL IN HERE *) Admitted.
+Proof. reflexivity. Qed.
 
 (** [] *)
 
@@ -570,15 +591,14 @@ Proof. reflexivity.  Qed.
     yielding a [b]oolean.  Instead of making up a new [Fixpoint] for
     this one, define it in terms of a previously defined function. *)
 
-Definition blt_nat (n m : nat) : bool :=
-  (* FILL IN HERE *) admit.
+Definition blt_nat (n m : nat) : bool := negb (nandb (ble_nat n m)  (negb (beq_nat n m))).
 
 Example test_blt_nat1:             (blt_nat 2 2) = false.
-(* FILL IN HERE *) Admitted.
+Proof. reflexivity. Qed.
 Example test_blt_nat2:             (blt_nat 2 4) = true.
-(* FILL IN HERE *) Admitted.
+Proof. reflexivity. Qed.
 Example test_blt_nat3:             (blt_nat 4 2) = false.
-(* FILL IN HERE *) Admitted.
+Proof. reflexivity. Qed.
 
 (** [] *)
 
@@ -720,7 +740,13 @@ Proof.
 Theorem plus_id_exercise : forall n m o : nat,
   n = m -> m = o -> n + m = m + o.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros n m.
+  intros o.
+  intros H.
+  intros J.
+  rewrite -> H.
+  rewrite -> J.
+  reflexivity. Qed.
 (** [] *)
 
 (** As we've seen in earlier examples, the [Admitted] command
@@ -750,7 +776,11 @@ Theorem mult_S_1 : forall n m : nat,
   m = S n -> 
   m * (1 + n) = m * m.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros n m.
+  intros H.
+  rewrite -> plus_1_l.
+  rewrite -> H.
+  reflexivity. Qed.
 (** [] *)
 
 
@@ -835,7 +865,10 @@ Proof.
 Theorem zero_nbeq_plus_1 : forall n : nat,
   beq_nat 0 (n + 1) = false.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros n. destruct n as [ | n' ].
+  reflexivity.
+  reflexivity.
+Qed.
 
 (** [] *)
 
@@ -851,13 +884,30 @@ Theorem identity_fn_applied_twice :
   (forall (x : bool), f x = x) ->
   forall (b : bool), f (f b) = b.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros F X.
+  intros b.
+  rewrite -> X.
+  rewrite -> X.
+  reflexivity.
+Qed.
+  
 
 (** Now state and prove a theorem [negation_fn_applied_twice] similar
     to the previous one but where the second hypothesis says that the
     function [f] has the property that [f x = negb x].*)
 
-(* FILL IN HERE *)
+Theorem negation_fn_applied_twice : 
+  forall (f : bool -> bool), 
+  (forall (x : bool), f x = negb x) ->
+  forall (b : bool), f (f b) = b.
+Proof.
+  intros F X.
+  intros b.
+  rewrite -> X.
+  rewrite -> X.
+  rewrite -> negb_involutive.
+  reflexivity.
+Qed.
 (** [] *)
 
 (** **** Exercise: 2 stars (andb_eq_orb)  *)
@@ -870,7 +920,15 @@ Theorem andb_eq_orb :
   (andb b c = orb b c) ->
   b = c.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros b c. destruct b.
+  destruct c.
+  simpl. reflexivity.
+  simpl. intros H. rewrite -> H. reflexivity.
+  destruct c.
+  simpl. intros J. rewrite -> J. reflexivity.
+  reflexivity.
+Qed.
+
 (** [] *)
 
 (** **** Exercise: 3 stars (binary)  *)
@@ -909,7 +967,48 @@ Proof.
         then incrementing. 
 *)
 
-(* FILL IN HERE *)
+Inductive bin : Type :=
+  | B : bin
+  | TB : bin -> bin
+  | OTB : bin -> bin.
+
+Fixpoint incr (b : bin) : bin :=
+  match b with
+  | B => OTB B
+  | TB b' => OTB b'
+  | OTB b' => TB (incr b')
+  end.
+
+Eval compute in incr (incr (incr B)).
+
+Fixpoint doublenat (n : nat) : nat :=
+  match n with
+  | O => 0
+  | S n' => S (S (doublenat n'))
+  end.
+
+Fixpoint bin_to_nat (b : bin) : nat :=
+  match b with
+  | B => O
+  | TB b' => doublenat (bin_to_nat b')
+  | OTB b' => S ( doublenat (bin_to_nat b'))
+  end.
+
+Example test_bin_incr1:     incr (incr (incr (incr B))) = TB (TB (OTB B)).
+Proof. reflexivity.  Qed.
+
+Example test_bin_incr2:     bin_to_nat (OTB (TB (TB (OTB B)))) = 9.
+Proof. reflexivity.  Qed.
+
+Example test_bin_incr3:     bin_to_nat (incr (incr (incr (incr B)))) = 4.
+Proof. reflexivity.  Qed.
+
+Example test_bin_incr4:     bin_to_nat (incr (TB (TB (incr B)))) = 5.
+Proof. reflexivity.  Qed.
+
+Example test_bin_incr5:     S (bin_to_nat (OTB (TB (TB (OTB B))))) = bin_to_nat (incr (OTB (TB (TB (OTB B))))).
+Proof. reflexivity.  Qed.
+
 (** [] *)
 
 (* ###################################################################### *)
@@ -977,9 +1076,18 @@ Fixpoint plus' (n : nat) (m : nat) : nat :=
     [Fixpoint] definition (of a simple function on numbers, say) that
     _does_ terminate on all inputs, but that Coq will reject because
     of this restriction. *)
-
-(* FILL IN HERE *)
+(*
+Fixpoint funminus (n : nat)  : nat :=
+  match n with
+  | O => O
+  | S n' =>
+    match n' with
+    | O => O
+    | S n'' => funminus (pred n)
+    end
+  end.
 (** [] *)
+*)
 
 (** $Date: 2014-12-31 15:31:47 -0500 (Wed, 31 Dec 2014) $ *)
 
