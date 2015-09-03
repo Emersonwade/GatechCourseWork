@@ -224,24 +224,44 @@ Proof.
 Theorem mult_0_r : forall n:nat,
   n * 0 = 0.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros n. induction n as [ | n'].
+  Case "n = 0".
+    simpl. reflexivity.
+  Case "n = n'".
+    simpl. rewrite -> IHn'. reflexivity. Qed.
 
 Theorem plus_n_Sm : forall n m : nat, 
   S (n + m) = n + (S m).
-Proof. 
-  (* FILL IN HERE *) Admitted.
-
+Proof.
+  intros n m. induction n as [ | n'].
+  Case "n = 0".
+    simpl. reflexivity.
+  Case "n = n'".
+    simpl. rewrite -> IHn'. reflexivity. Qed.
 
 Theorem plus_comm : forall n m : nat,
   n + m = m + n.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros n m. induction n as [ | n'].
+  Case "n = 0".
+    rewrite -> plus_0_r. reflexivity.
+  Case "n = n'".
+    simpl.
+    rewrite -> IHn'.
+    rewrite -> plus_n_Sm.
+    reflexivity. Qed.
 
 
 Theorem plus_assoc : forall n m p : nat,
   n + (m + p) = (n + m) + p.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros n m p. induction n as [ | n'].
+  Case "n = 0".
+    simpl. rewrite -> plus_comm.
+    reflexivity.
+  Case "n = n'".
+    simpl. rewrite -> IHn'.
+    reflexivity. Qed.
 (** [] *)
 
 (** **** Exercise: 2 stars (double_plus)  *)
@@ -258,7 +278,14 @@ Fixpoint double (n:nat) :=
 
 Lemma double_plus : forall n, double n = n + n .
 Proof.  
-  (* FILL IN HERE *) Admitted.
+  intros n. induction n as [ | n'].
+  Case "n = 0".
+    simpl. reflexivity.
+  Case "n = n'".
+    simpl. rewrite -> IHn'.
+    rewrite -> plus_n_Sm.
+    reflexivity. Qed.
+
 (** [] *)
 
 
@@ -328,11 +355,17 @@ Theorem plus_rearrange_firsttry : forall n m p q : nat,
   (n + m) + (p + q) = (m + n) + (p + q).
 Proof.
   intros n m p q.
+  replace (n + m) with (m + n).
+    reflexivity.
+  rewrite -> plus_comm.
+  reflexivity.
+Qed.
   (* We just need to swap (n + m) for (m + n)...
      it seems like plus_comm should do the trick! *)
-  rewrite -> plus_comm.
+(* rewrite -> (plus_comm n m). *)
+(* rewrite -> (plus_comm (n : n) (m : m). *)
   (* Doesn't work...Coq rewrote the wrong plus! *)
-Abort.
+
 
 (** To get [plus_comm] to apply at the point where we want it, we can
     introduce a local lemma stating that [n + m = m + n] (for
@@ -356,8 +389,14 @@ Proof.
 Theorem plus_swap : forall n m p : nat, 
   n + (m + p) = m + (n + p).
 Proof.
-  (* FILL IN HERE *) Admitted.
-
+  intros n m p.
+  assert (H: n + m = m + n).
+    Case "Proof of assertion".
+      rewrite -> plus_comm. reflexivity.
+    rewrite -> plus_assoc.
+    rewrite -> H.
+    rewrite -> plus_assoc.
+    reflexivity. Qed.
 
 (** Now prove commutativity of multiplication.  (You will probably
     need to define and prove a separate subsidiary theorem to be used
@@ -369,6 +408,20 @@ Theorem mult_comm : forall m n : nat,
 Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
+
+Theorem plus_elim : forall m n : nat,
+ n + n * m = n * S m.
+Proof.
+  intros m n.
+  induction n as [| n'].
+  Case "n = 0".
+    simpl. reflexivity.
+  Case "n = S n'".
+    simpl.
+    rewrite <- IHn'.
+    rewrite -> plus_swap.
+    reflexivity.
+Qed.
 
 (** **** Exercise: 2 stars, optional (evenb_n__oddb_Sn)  *)
 
@@ -487,7 +540,21 @@ Proof.
     wanting to change your original definitions to make the property
     easier to prove, feel free to do so.) *)
 
-(* FILL IN HERE *)
+Theorem bin_to_nat_pres_incr : forall b : bin,
+  bin_to_nat (incr b) = bin_to_nat b + 1.
+Proof.
+  intros b. induction b as [ | b' | b''].
+  Case "n = B".
+    simpl. reflexivity.
+  Case "n = b'".
+    rewrite <- plus_comm. simpl. reflexivity.
+  Case "n = b''".
+    simpl. rewrite -> IHb''.
+    assert (H: doublenat (bin_to_nat b'') + 1 = 1 + doublenat (bin_to_nat b'')).
+      rewrite -> plus_comm. reflexivity.
+    rewrite -> H. rewrite -> plus_comm. simpl. reflexivity.
+    Qed.
+    
 (** [] *)
 
 
@@ -517,7 +584,78 @@ Proof.
     here. 
 *)
 
-(* FILL IN HERE *)
+Fixpoint nat_to_bin (n : nat) : bin :=
+  match n with
+  | O => B
+  | S n' => incr (nat_to_bin n')
+  end.
+
+Eval compute in nat_to_bin 8.
+
+Theorem bin_to_nat_incr_equal : forall b : bin,
+  bin_to_nat (incr b) = S (bin_to_nat b).
+Proof.
+  intros b. induction b as [ | b' | b''].
+  Case "b = B".
+    simpl. reflexivity.
+  Case "b = b'(TB)".
+    simpl. reflexivity.
+  Case "b = b''(OTB)".
+    simpl. rewrite -> IHb''. simpl.
+    reflexivity.
+Qed.
+
+Theorem nat_to_bin_equal : forall n : nat,
+  bin_to_nat (nat_to_bin n) = n.
+Proof.
+  intros n. induction n as [ | n'].
+  Case "n = 0".
+    simpl. reflexivity.
+  Case "n = S n'".
+    simpl. rewrite -> bin_to_nat_incr_equal.
+    rewrite -> IHn'. 
+    reflexivity.
+Qed.
+
+Theorem bin_to_nat_equal : forall b : bin,
+  nat_to_bin (bin_to_nat b) = b.
+Proof.
+  intros b. induction b as [ | b' | b''].
+  Case "b = B".
+    simpl. reflexivity.
+  Case "b = b'".
+    simpl.
+Abort.
+
+(* We cannot prove the bin_to_nat_equal maybe because 
+there are different ways to represent a same number. For example, 
+7 could be transformed to OTB (OTB (OTB B)) or OTB (OTB (OTB (TB B))).
+*)
+
+Eval compute in nat_to_bin (bin_to_nat (OTB(TB (TB B)))).
+
+Definition normalize (b : bin) : bin := 
+  match b with 
+  | b => nat_to_bin (bin_to_nat b)
+  end.
+
+Fixpoint isNormalized (b : bin) : bin :=
+  match b with 
+  |
+
+Theorem nat_to_bin_incr_equal : forall (n : nat) (b : bin),
+  n = bin_to_nat b -> S n = bin_to_nat(incr b).
+Proof.
+  intros b. induction b as [ | b' | b''].
+  Case "b = B".
+    simpl. intros. rewrite -> H. reflexivity.
+  Case "b = b'".
+    simpl. intros. rewrite -> H. reflexivity.
+  Case "b = b''".
+    simpl. intros.
+  rewrite -> H.
+  Abort.
+
 (** [] *)
 
 (* ###################################################################### *)

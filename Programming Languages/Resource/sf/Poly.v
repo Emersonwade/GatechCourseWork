@@ -132,22 +132,28 @@ Fixpoint snoc (X:Type) (l:list X) (v:X) : (list X) :=
   | cons h t => cons X h (snoc X t v)
   end.
 
+Eval compute in snoc nat (nil nat) 1.
+
+Eval compute in snoc nat (snoc nat (cons nat 2 (nil nat)) 3) 1.
+
 Fixpoint rev (X:Type) (l:list X) : list X :=
   match l with
   | nil      => nil X
   | cons h t => snoc X (rev X t) h
   end.
 
-
-
 Example test_rev1 :
     rev nat (cons nat 1 (cons nat 2 (nil nat)))
   = (cons nat 2 (cons nat 1 (nil nat))).
-Proof. reflexivity.  Qed.
+Proof.
+ simpl. reflexivity.  Qed.
 
 Example test_rev2:
   rev bool (nil bool) = nil bool.
-Proof. reflexivity.  Qed.
+Proof.
+ simpl. reflexivity.  Qed.
+
+Eval compute in cons bool true (rev bool (nil bool)).
 
 Module MumbleBaz.
 (** **** Exercise: 2 stars (mumble_grumble)  *)

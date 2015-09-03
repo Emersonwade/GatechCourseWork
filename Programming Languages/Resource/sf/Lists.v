@@ -202,6 +202,41 @@ Fixpoint length (l:natlist) : nat :=
   | h :: t => S (length t)
   end.
 
+Theorem foo2 : forall n m : nat, forall l : natlist,
+  repeat n m = l -> length l = m.
+Proof. 
+  intros n m l.
+  induction m as [ | m'].
+    Case "m = 0".
+      simpl.
+      intros.
+      rewrite <- H.
+      reflexivity.
+    Case "m = S m'".
+      simpl.
+      intros.
+  Abort.
+
+Theorem foo2 : forall n m : nat, forall l : natlist,
+  repeat n m = l -> length l = m.
+Proof. 
+  intros n m.
+  induction m as [ | m'].
+    Case "m = 0".
+      simpl.
+      intros.
+      rewrite <- H.
+      reflexivity.
+    Case "m = S m'".
+      simpl.
+      intros.
+      rewrite <- H.
+      simpl.
+      rewrite -> IHm'.
+      reflexivity.
+      reflexivity.
+Qed.
+
 (** *** Append *)
 (** The [app] ("append") function concatenates two lists. *)
 
