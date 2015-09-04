@@ -557,7 +557,6 @@ Proof.
     
 (** [] *)
 
-
 (** **** Exercise: 5 stars, advanced (binary_inverse)  *)
 (** This exercise is a continuation of the previous exercise about
     binary numbers.  You will need your definitions and theorems from
@@ -583,7 +582,7 @@ Proof.
     Again, feel free to change your earlier definitions if this helps
     here. 
 *)
-
+(*a*)
 Fixpoint nat_to_bin (n : nat) : bin :=
   match n with
   | O => B
@@ -617,6 +616,7 @@ Proof.
     reflexivity.
 Qed.
 
+(*b*)
 Theorem bin_to_nat_equal : forall b : bin,
   nat_to_bin (bin_to_nat b) = b.
 Proof.
@@ -632,18 +632,11 @@ there are different ways to represent a same number. For example,
 7 could be transformed to OTB (OTB (OTB B)) or OTB (OTB (OTB (TB B))).
 *)
 
+(* These theorem are what I tried during this HW, it is not connected to question c*
 Eval compute in nat_to_bin (bin_to_nat (OTB(TB (TB B)))).
 
-Definition normalize (b : bin) : bin := 
-  match b with 
-  | b => nat_to_bin (bin_to_nat b)
-  end.
 
-Fixpoint isNormalized (b : bin) : bin :=
-  match b with 
-  |
-
-Theorem nat_to_bin_incr_equal : forall (n : nat) (b : bin),
+Theorem nat_to_bin_incr_equal : forall (b : bin)  (n : nat) ,
   n = bin_to_nat b -> S n = bin_to_nat(incr b).
 Proof.
   intros b. induction b as [ | b' | b''].
@@ -653,8 +646,134 @@ Proof.
     simpl. intros. rewrite -> H. reflexivity.
   Case "b = b''".
     simpl. intros.
-  rewrite -> H.
-  Abort.
+    rewrite -> H.
+    rewrite <- (IHb'' (bin_to_nat b'')).
+    reflexivity.
+    reflexivity.
+Qed.
+
+
+Fixpoint pred_bin (b : bin) : bin :=
+  match b with
+  | B => B
+  | TB b' => incr (TB (pred_bin b'))
+  | OTB b' => TB b'
+  end.
+
+Eval compute in pred_bin (OTB B).
+Eval compute in pred_bin  (OTB (TB ( OTB ( TB (TB B))))).
+
+Fixpoint normalize2 (b : bin) : bin :=
+  match b with
+  | B => B
+  | TB B => B
+  | TB b' => normalize2 (TB (normalize2 b'))
+  | OTB b' => OTB (normalize2 b')
+  end.
+
+Eval compute in normalize2 (OTB (TB (TB  (OTB ( TB ( TB (TB B))))))).
+
+Eval compute in normalize2 (OTB (TB ( TB ( TB (TB B))))).
+
+Theorem doublenat_equal : forall n : nat,
+  nat_to_bin (doublenat n) = TB (nat_to_bin n).
+Proof.
+  intros n. induction n as [ | n'].
+  Case "n = 0".
+    simpl.
+Abort.
+*)
+
+(*c*)
+Fixpoint normalize (b : bin) : bin :=
+  match b with
+  | B => B
+  | TB b' => match (normalize b') with
+                  | B => B
+                  | TB b'' => TB (TB b'')
+                  | OTB b'' => TB (OTB b'')
+                  end
+  | OTB b' => OTB (normalize b')
+  end.
+
+Eval compute in normalize (TB (TB ( TB ( TB (TB B))))).
+
+Definition doublebin (b: bin): bin :=
+  match b with
+    | B => B
+    | TB b' => TB (TB b')
+    | OTB b' => TB (OTB b')
+end.
+
+Theorem normalizehelper2 : forall b : bin,
+  incr (incr (doublebin b)) = doublebin (incr b).
+Proof.
+  intros b. induction b as [ | b' | b''].
+  Case "b = B".
+    simpl. reflexivity.
+  Case "b = b'".
+    simpl. reflexivity.
+  Case "b = b''".
+    simpl. reflexivity.
+Qed.
+
+Theorem normalizehelper : forall n : nat,
+  nat_to_bin (n + n) = doublebin (nat_to_bin n).
+Proof.
+  intros n. induction n as [ | n'].
+  Case "n = 0".
+    simpl. reflexivity.
+  Case "n = n'".
+    simpl. rewrite <- plus_n_Sm. simpl.
+    rewrite -> IHn'. rewrite -> normalizehelper2.
+    reflexivity.
+Qed.
+
+Theorem normalizehelper3 : forall n : nat,
+  nat_to_bin (n + n + 1) = incr (doublebin (nat_to_bin n)).
+Proof.
+  intros n. induction n as [ | n'].
+  Case "n = 0".
+    simpl. reflexivity.
+  Case "n = n'".
+    simpl. replace (n' + S n') with (S n' + n'). simpl.
+    rewrite -> IHn'. rewrite <- normalizehelper2.
+    reflexivity.
+    rewrite -> plus_comm.
+    reflexivity.
+Qed.
+
+Theorem normalizehelper4 : forall b : bin,
+  OTB b = incr (doublebin b).
+Proof.
+  intros b. induction b as [ | b' | b''].
+  Case "b = B".
+    reflexivity.
+  Case "b = b'".
+    simpl. reflexivity.
+  Case "b = b''".
+    simpl. reflexivity.
+Qed.
+
+Theorem normalizeproof : forall (b : bin) (n : nat),
+ normalize b = nat_to_bin (bin_to_nat b).
+Proof.
+  intros b n. induction b as [ | b' | b''].
+  Case "b = B".
+    simpl. reflexivity.
+  Case "b = TB b'".
+    simpl. rewrite <- plus_n_O.
+    intros. 
+    simpl. intros. rewrite -> normalizehelper.
+    rewrite <- IHb'.
+    unfold doublebin.
+    reflexivity.
+  Case "b = OTB b''".
+    simpl. rewrite <- plus_n_O.
+    rewrite -> normalizehelper3.
+    rewrite -> IHb''. rewrite -> normalizehelper4.
+    reflexivity.
+Qed.
 
 (** [] *)
 
