@@ -29,35 +29,6 @@ int main(int argc, char const *argv[])
     cout << "PLS input the string" << endl;
     cin >> source;
 
-    int columns = (source.length() / (n + n - 2) + 1) * (n - 1);
-
-    char ** matrix = new char *[n];
-    for(int i = 0; i < n; i ++){
-        matrix[i] = new char[columns];
-        for(int j = 0; j < columns; j ++){
-            matrix[i][j] = '1';
-        }
-    }
-
-    int row = 0, column = 0;
-    for(int i = 0; i < source.length(); i ++){
-        matrix[row][column] = source[i];
-        if(row < n - 1){
-            row ++;
-        }
-        else {
-            column ++;
-            row = 0;
-        }
-    }
-
-    for(int i = 0; i < n; i ++){
-        for(int j = 0; j < column; j ++){
-            cout << matrix[i][j] << " ";
-        }
-        cout << endl;
-    }
-
     system( "read -n 1 -s -p \"Press any key to continue...\"" );
     return 0;
 }

@@ -21,6 +21,27 @@ Require Export Lists.
     _could_ just define a new inductive datatype for each of these,
     for example... *)
 
+Theorem extra_swap : forall ( m n o : nat), n + o = o + n.
+Proof. Admitted.
+
+Theorem use : forall m n, S(m + n) = S(n + m).
+Proof.
+  intros.
+  rewrite -> extra_swap.
+  reflexivity.
+  apply n.
+Qed.
+
+Definition id_nat (n : nat) : nat := n.
+Definition id_bool (b : bool) : bool := b.
+Definition id (X : Type) (x : X) := x.
+
+Check id_nat.
+Check id_bool.
+Check id.
+
+Check id_nat 0.
+
 Inductive boollist : Type :=
   | bool_nil : boollist
   | bool_cons : bool -> boollist -> boollist.
@@ -348,6 +369,8 @@ Definition mynil : list nat := nil.
 
 Check @nil.
 
+Check @nil nat.
+
 Definition mynil' := @nil nat.
 
 (** *** *)
@@ -364,6 +387,8 @@ Notation "x ++ y" := (app x y)
                      (at level 60, right associativity).
 
 (** Now lists can be written just the way we'd hope: *)
+
+Check [andb true false] ++ nil.
 
 Definition list123''' := [1; 2; 3].
 
