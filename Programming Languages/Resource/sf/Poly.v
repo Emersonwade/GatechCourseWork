@@ -62,7 +62,6 @@ Inductive list (X:Type) : Type :=
   | nil : list X
   | cons : X -> list X -> list X.
 
-
 (** This is exactly like the definition of [natlist] from the
     previous chapter, except that the [nat] argument to the [cons]
     constructor has been replaced by an arbitrary type [X], a binding
@@ -210,7 +209,7 @@ Inductive baz : Type :=
    | y : baz -> bool -> baz.
 
 (** How _many_ elements does the type [baz] have? 
-(* FILL IN HERE *)
+
 *)
 (** [] *)
 
@@ -405,35 +404,59 @@ Definition list123''' := [1; 2; 3].
     and complete the proofs below. *)
 
 Fixpoint repeat {X : Type} (n : X) (count : nat) : list X :=
-  (* FILL IN HERE *) admit.
+match count with
+| O => nil
+| S count' => cons n (repeat n count')
+end.
 
 Example test_repeat1:
   repeat true 2 = cons true (cons true nil).
- (* FILL IN HERE *) Admitted.
+Proof.
+  simpl. reflexivity.
+Qed.
 
 Theorem nil_app : forall X:Type, forall l:list X,
   app [] l = l.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  simpl. reflexivity.
+Qed.
 
 Theorem rev_snoc : forall X : Type,
                      forall v : X,
                      forall s : list X,
   rev (snoc s v) = v :: (rev s).
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros X v s. induction s as [ | h s'].
+  Case "s = nil".
+    simpl. reflexivity.
+  Case "s = h s'".
+    simpl. rewrite -> IHs'.
+    simpl. reflexivity.
+Qed.
 
 Theorem rev_involutive : forall X : Type, forall l : list X,
   rev (rev l) = l.
 Proof.
-(* FILL IN HERE *) Admitted.
+  intros X l. induction l as [ | n l'].
+  Case "l = nil".
+    simpl. reflexivity.
+  Case "l = n l'".
+    simpl. rewrite -> rev_snoc.
+    rewrite -> IHl'. reflexivity.
+Qed.
 
 Theorem snoc_with_append : forall X : Type,
                          forall l1 l2 : list X,
                          forall v : X,
   snoc (l1 ++ l2) v = l1 ++ (snoc l2 v).
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros X l1 l2 v. induction l1 as [ | n l1'].
+    Case "l1 = nil".
+      simpl. reflexivity.
+    Case "l1 = n l1'".
+      simpl. rewrite -> IHl1'.
+      reflexivity.
+Qed.
 (** [] *)
 
 (* ###################################################### *)
@@ -656,12 +679,12 @@ Proof. reflexivity.  Qed.
 Definition prod_curry {X Y Z : Type}
   (f : X * Y -> Z) (x : X) (y : Y) : Z := f (x, y).
 
+
 (** As an exercise, define its inverse, [prod_uncurry].  Then prove
     the theorems below to show that the two are inverses. *)
 
 Definition prod_uncurry {X Y Z : Type}
-  (f : X -> Y -> Z) (p : X * Y) : Z :=
-  (* FILL IN HERE *) admit.
+  (f : X -> Y -> Z) (p : X * Y) : Z := f (fst p) (snd p).
 
 (** (Thought exercise: before running these commands, can you
     calculate the types of [prod_curry] and [prod_uncurry]?) *)
@@ -672,13 +695,21 @@ Check @prod_uncurry.
 Theorem uncurry_curry : forall (X Y Z : Type) (f : X -> Y -> Z) x y,
   prod_curry (prod_uncurry f) x y = f x y.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  reflexivity.
+Qed.
+(*I don't know why the single reflexivity could proof this. But the simpl doesn't work.*)
 
 Theorem curry_uncurry : forall (X Y Z : Type)
                                (f : (X * Y) -> Z) (p : X * Y),
   prod_uncurry (prod_curry f) p = f p.
 Proof.
-  (* FILL IN HERE *) Admitted.
+Abort.
+
+Inductive f1 (X:Type) : Type := Y.
+Check f1.
+(*What does the Type->Prop mean?*)
+
+Check @prod_curry  nat nat.
 (** [] *)
 
 (* ###################################################### *)
