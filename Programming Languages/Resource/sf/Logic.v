@@ -227,6 +227,12 @@ Proof.
     Case "left". apply HQ. 
     Case "right". apply HP.  Qed.
   
+Theorem quiz_and : forall P Q : Prop,
+  P /\ Q -> P \/ Q.
+Proof.
+  intros. destruct H as [HP HQ].
+  left. apply HP.
+Qed.
 
 (** **** Exercise: 2 stars (and_assoc)  *)
 (** In the following proof, notice how the _nested pattern_ in the
@@ -310,6 +316,10 @@ Inductive or (P Q : Prop) : Prop :=
   | or_intror : Q -> or P Q. 
 
 Notation "P \/ Q" := (or P Q) : type_scope.
+(*
+************************************************
+meaning of the type_scope
+*)
 
 (** Consider the "type" of the constructor [or_introl]: *)
 
@@ -547,7 +557,7 @@ Theorem contradiction_implies_anything : forall P Q : Prop,
   (P /\ ~P) -> Q.
 Proof. 
   (* WORKED IN CLASS *)
-  intros P Q H. destruct H as [HP HNA]. unfold not in HNA. 
+  intros P Q H. destruct H as [HP HNA]. unfold not in HNA.
   apply HNA in HP. inversion HP.  Qed.
 
 Theorem double_neg : forall P : Prop,
@@ -555,6 +565,14 @@ Theorem double_neg : forall P : Prop,
 Proof.
   (* WORKED IN CLASS *)
   intros P H. unfold not. intros G. apply G. apply H.  Qed.
+
+Theorem double_neg1 : forall P : Prop,
+  ~~P -> P.
+Proof.
+  intros. unfold not in H.
+Abort.
+  
+
 
 (** **** Exercise: 2 stars, advanced (double_neg_inf)  *)
 (** Write an informal proof of [double_neg]:

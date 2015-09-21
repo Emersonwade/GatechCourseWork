@@ -209,7 +209,7 @@ Inductive baz : Type :=
    | y : baz -> bool -> baz.
 
 (** How _many_ elements does the type [baz] have? 
-
+There would be no elements in the type [baz]. Because we don't have a basic case.
 *)
 (** [] *)
 
@@ -695,21 +695,32 @@ Check @prod_uncurry.
 Theorem uncurry_curry : forall (X Y Z : Type) (f : X -> Y -> Z) x y,
   prod_curry (prod_uncurry f) x y = f x y.
 Proof.
+  unfold prod_uncurry. unfold prod_curry. simpl.
   reflexivity.
 Qed.
-(*I don't know why the single reflexivity could proof this. But the simpl doesn't work.*)
+(*
+************************************************
+************************************************
+************************************************
+I don't know why the single reflexivity could proof this. But the simpl doesn't work.*)
 
 Theorem curry_uncurry : forall (X Y Z : Type)
                                (f : (X * Y) -> Z) (p : X * Y),
   prod_uncurry (prod_curry f) p = f p.
 Proof.
-Abort.
+  intros. destruct p as [x y].
+  reflexivity.
+Qed.
 
-Inductive f1 (X:Type) : Type := Y.
+Inductive f1 (X Y : Type) : Type := Y.
 Check f1.
-(*What does the Type->Prop mean?*)
 
-Check @prod_curry  nat nat.
+(*
+************************************************
+************************************************
+************************************************
+What does the Type->Prop mean?*)
+
 (** [] *)
 
 (* ###################################################### *)
@@ -876,11 +887,30 @@ Proof. reflexivity.  Qed.
 (** Show that [map] and [rev] commute.  You may need to define an
     auxiliary lemma. *)
 
+Lemma map_revLemma : forall (X Y : Type) (f: X -> Y) (l : list X) (n : X),
+  map f (snoc l n) = snoc (map f l) (f n).
+Proof.
+  intros. induction l as [ | n' l'].
+  Case "l = nil".
+    simpl. reflexivity.
+  Case "l = n l'".
+    simpl. rewrite -> IHl'.
+    reflexivity.
+Qed.
+
 
 Theorem map_rev : forall (X Y : Type) (f : X -> Y) (l : list X),
   map f (rev l) = rev (map f l).
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros. induction l as [ | n l'].
+  Case "l = nil".
+    simpl. reflexivity.
+  Case "l = n l'".
+    simpl. rewrite -> map_revLemma.
+    rewrite -> IHl'.
+    reflexivity.
+Qed.
+
 (** [] *)
 
 (** **** Exercise: 2 stars (flat_map)  *)
@@ -1133,12 +1163,21 @@ Theorem fold_length_correct : forall X (l : list X),
     below. *)
 
 Definition fold_map {X Y:Type} (f : X -> Y) (l : list X) : list Y :=
-(* FILL IN HERE *) admit.
+  fold (fun x rest => (f x) :: rest) l [].
 
 (** Write down a theorem [fold_map_correct] in Coq stating that
    [fold_map] is correct, and prove it. *)
 
-(* FILL IN HERE *)
+Theorem fold_map_correct : forall {X Y:Type} (f : X -> Y) (l : list X),
+  fold_map f l = map f l.
+Proof.
+  intros. induction l as [ | n l'].
+  Case "l = nil".
+    simpl. reflexivity.
+  Case "l = n l'".
+    simpl. rewrite <- IHl'. simpl. reflexivity.
+Qed.
+
 (** [] *)
 
 (** **** Exercise: 2 stars, advanced (index_informal)  *)
@@ -1164,7 +1203,7 @@ Module Church.
     number [n] as a function that takes a function [f] as a parameter
     and returns [f] iterated [n] times. More formally, *)
 
-Definition nat := forall X : Type, (X -> X) -> X -> X.
+Definition nat := forall X : Type, (X -> X) -> (X -> X).
 
 (** Let's see how to write some numbers with this notation. Any
     function [f] iterated once shouldn't change. Thus, *)
@@ -1197,45 +1236,64 @@ Definition three : nat := @doit3times.
 (** Successor of a natural number *)
 
 Definition succ (n : nat) : nat :=
-  (* FILL IN HERE *) admit.
+  fun (X : Type) (f: X -> X) (x : X) => f(n X f x).
 
 Example succ_1 : succ zero = one.
-Proof. (* FILL IN HERE *) Admitted.
+Proof.
+  reflexivity.
+Qed.
 
 Example succ_2 : succ one = two.
-Proof. (* FILL IN HERE *) Admitted.
+Proof.
+  reflexivity.
+Qed.
 
 Example succ_3 : succ two = three.
-Proof. (* FILL IN HERE *) Admitted.
+Proof.
+  reflexivity.
+Qed.
 
 (** Addition of two natural numbers *)
 
 Definition plus (n m : nat) : nat :=
-  (* FILL IN HERE *) admit.
+ fun (X : Type) (f : X -> X) (x : X) => (n X f (m X f x)).
+
 
 Example plus_1 : plus zero one = one.
-Proof. (* FILL IN HERE *) Admitted.
+Proof.
+  reflexivity. 
+Qed.
 
 Example plus_2 : plus two three = plus three two.
-Proof. (* FILL IN HERE *) Admitted.
+Proof.
+  reflexivity. 
+Qed.
 
 Example plus_3 :
   plus (plus two two) three = plus one (plus three three).
-Proof. (* FILL IN HERE *) Admitted.
+Proof.
+  reflexivity. 
+Qed.
 
 (** Multiplication *)
 
 Definition mult (n m : nat) : nat := 
-  (* FILL IN HERE *) admit.
+fun (X : Type) (f : X -> X) (x : X) => (n X (m X f) x).
 
 Example mult_1 : mult one one = one.
-Proof. (* FILL IN HERE *) Admitted.
+Proof.
+  reflexivity. 
+Qed.
 
 Example mult_2 : mult zero (plus three three) = zero.
-Proof. (* FILL IN HERE *) Admitted.
+Proof.
+  reflexivity. 
+Qed.
 
 Example mult_3 : mult two three = plus three three.
-Proof. (* FILL IN HERE *) Admitted.
+Proof.
+  reflexivity. 
+Qed.
 
 (** Exponentiation *)
 
@@ -1245,16 +1303,22 @@ Proof. (* FILL IN HERE *) Admitted.
     type: [nat] itself is usually problematic. *)
 
 Definition exp (n m : nat) : nat :=
-  (* FILL IN HERE *) admit.
+fun (X : Type) (f : X -> X) (x : X) =>  (m (X -> X) (n X) f) x.
 
 Example exp_1 : exp two two = plus two two.
-Proof. (* FILL IN HERE *) Admitted.
+Proof.
+  reflexivity. 
+Qed.
 
 Example exp_2 : exp three two = plus (mult two (mult two two)) one.
-Proof. (* FILL IN HERE *) Admitted.
+Proof.
+  reflexivity. 
+Qed.
 
 Example exp_3 : exp three zero = one.
-Proof. (* FILL IN HERE *) Admitted.
+Proof.
+  reflexivity. 
+Qed.
 
 End Church.
 
