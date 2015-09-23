@@ -70,6 +70,25 @@ Proof. reflexivity. Qed.
 
 (** *** *)
 
+Theorem test : forall (f : nat -> nat) (x : nat), f x = f x.
+Proof.
+  intros.
+  destruct f.
+  reflexivity.
+  reflexivity.
+Qed.
+
+Theorem test2 : forall (X : Type) (f : nat -> X) (x : nat), f x = f x.
+Proof.
+  intros.
+(*
+  destruct f.
+  reflexivity.
+  reflexivity.
+Qed.
+*)
+Abort.
+
 Lemma silly : 0 * 3 = 0.
 Proof. reflexivity. Qed.
 
@@ -680,6 +699,34 @@ Proof.
     apply ex_falso_quodlibet.
     apply H. reflexivity.   Qed.
 
+Theorem quiz1 : forall (X : Type) ( a b : X),
+  (a = b) /\ (a <> b) -> False.
+Proof.
+  intros. destruct H as [H0 H1].
+(*
+  apply H1.
+  apply H0.
+*)
+(*
+  apply H1 in H0.
+*)
+(*
+apply H0 in H1
+*)
+Abort.
+
+Theorem quiz2 : forall (P Q : Prop),
+  P \/ Q -> ~~(P \/ Q).
+Proof.
+  intros P Q H H1.
+(*******************************)
+Abort.
+
+Theorem quiz3 : forall (P Q : Prop),
+  P \/ Q -> ~~P \/ ~~Q.
+Proof.
+  intros.
+Abort.
 
 (** *** *)
 

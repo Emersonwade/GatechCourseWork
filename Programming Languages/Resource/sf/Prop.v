@@ -31,7 +31,7 @@ Inductive ev : nat -> Prop :=
   | ev_0 : ev O
   | ev_SS : forall n:nat, ev n -> ev (S (S n)).
 
-
+Eval compute in ev 2.
 (** The first line declares that [ev] is a proposition -- or,
     more formally, a family of propositions "indexed by" natural
     numbers.  (That is, for each number [n], the claim that "[n] is
@@ -49,8 +49,9 @@ Inductive ev : nat -> Prop :=
 (** **** Exercise: 1 star (double_even)  *)
 
 Theorem double_even : forall n,
-  ev (double n).
+  ev ((double n) + 1).
 Proof.
+  intros.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
