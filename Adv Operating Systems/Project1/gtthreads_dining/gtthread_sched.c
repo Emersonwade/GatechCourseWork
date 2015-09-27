@@ -15,12 +15,9 @@ gtthreads library.  A simple round-robin queue should be used.
    they see fit.
  */
 
-steque_t *rr_sche_queue;
-enum sched_type
-{
-  preem = 0,
-  non_preem
-};
+
+
+
 
 
 /*
@@ -41,16 +38,8 @@ enum sched_type
   for pthread_create.
  */
 void gtthread_init(long period){
-  steque_init(rr_sche_queue);
 
-  if(period ==0){
 
-  }
-  else {
-
-  }
-
-  gtthread_t initer_t = 0;
 }
 
 
