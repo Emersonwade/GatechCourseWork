@@ -778,7 +778,16 @@ Theorem double_induction: forall (P : nat -> nat -> Prop),
   (forall m n, P m n -> P (S m) (S n)) ->
   forall m n, P m n.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros. generalize dependent n.
+  induction m as [ | m'].
+  Case "m = 0". induction n as [ | n'].
+  assumption. 
+  apply H1 in IHn'. assumption.
+  Case "m  = m'". induction n as [ | n'].
+  apply H0 in IHm'. assumption.
+  apply H2. apply IHm'.
+Qed.
+  
 (** [] *)
 
 
@@ -835,7 +844,21 @@ Theorem combine_split : forall X Y (l : list (X * Y)) l1 l2,
   split l = (l1, l2) ->
   combine l1 l2 = l.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros X Y l1.
+  induction l1 as [ | x l' ].
+  Case "l = nil".
+    intros. simpl in H. inversion H. reflexivity.
+  Case "l = x l'".
+    intros. simpl in H. destruct x. destruct (split l').
+      destruct l1 as [ | x1' l1'].
+      SCase "l1 = nil". destruct l2 as [ | x2' l2'].
+        inversion H.
+        inversion H.
+      SCase "l1 = x1' l1'". destruct l2 as [| x2' l2'].
+        inversion H.
+        simpl. rewrite -> IHl'. inversion H. reflexivity.
+        inversion H. reflexivity.
+Qed.
 (** [] *)
 
 (** Sometimes, doing a [destruct] on a compound expression (a
@@ -1059,7 +1082,16 @@ Theorem filter_exercise : forall (X : Type) (test : X -> bool)
      filter test l = x :: lf ->
      test x = true.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros. generalize dependent x. generalize dependent lf.
+  induction l as [ | x' l'].
+  Case "l = nil". simpl. intros.
+    inversion H.
+  Case "l = x' l'". simpl. intros. destruct (test x') eqn: H0.
+    SCase "test x'= true".
+      inversion H. rewrite <- H2. assumption.
+    SCase "test x' = false".
+      apply IHl' in H. apply H.
+Qed.
 (** [] *)
 
 (** **** Exercise: 4 stars, advanced (forall_exists_challenge)  *)
@@ -1088,8 +1120,36 @@ Proof.
     Prove theorem [existsb_existsb'] that [existsb'] and [existsb] have
     the same behavior.
 *)
+Fixpoint forallb {X:Type} (f: X->bool) (l: list X) : bool :=
+  match l with
+    | []      => true
+    | h :: t => andb (f h) (forallb f t)
+  end.
 
-(* FILL IN HERE *)
+Fixpoint existsb {X:Type} (f:X->bool) (l: list X) : bool :=
+  match l with
+    | []      => false
+    | h :: t => orb (f h) (existsb f t)
+  end.
+
+Definition existsb' {X:Type} (f:X->bool) (l: list X) : bool :=
+  negb( forallb (fun x => negb (f x)) l).
+
+Theorem existsb_existsb': forall (X:Type) (f:X->bool) (l: list X),
+  existsb' f l = existsb f l.
+Proof.
+  intros X. induction l as [ | x' l'].
+  Case "l = nil".
+    simpl. reflexivity.
+  Case "l = x' l'".
+    simpl. unfold existsb'. destruct (f x') eqn: H0.
+    SCase "f x' = true".
+      simpl. rewrite-> H0. simpl. reflexivity.
+    SCase "f x' = false".
+      simpl. rewrite-> H0. simpl. rewrite <- IHl'.
+      unfold existsb'.
+      reflexivity.
+Qed.
 (** [] *)
 
 (** $Date: 2014-12-31 16:01:37 -0500 (Wed, 31 Dec 2014) $ *)
