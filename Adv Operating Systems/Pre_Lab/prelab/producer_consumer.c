@@ -132,7 +132,7 @@ void *producer_routine(void *arg) {
 
     /* Add the node to the queue */
     pthread_mutex_lock(&queue_p->lock);
-    printf("1.Producer lock queue_p->lock\n");
+    //printf("1.Producer lock queue_p->lock\n");
     if (queue_p->back == NULL) {
       assert(queue_p->front == NULL);
       new_node_p->prev = NULL;
@@ -148,7 +148,7 @@ void *producer_routine(void *arg) {
     }
 
     pthread_mutex_unlock(&queue_p->lock);
-    printf("2.Producer unlock queue_p->lock\n");
+    //printf("2.Producer unlock queue_p->lock\n");
 
     sched_yield();
   }
@@ -161,10 +161,10 @@ void *producer_routine(void *arg) {
   */
 
   pthread_mutex_lock(&g_num_prod_lock);
-  printf("3.Producer lock g_num_prod_lock\n");
+  //printf("3.Producer lock g_num_prod_lock\n");
   --g_num_prod;
   pthread_mutex_unlock(&g_num_prod_lock);
-  printf("4.Producer unlock g_num_prod_lock\n");
+  //printf("4.Producer unlock g_num_prod_lock\n");
 
   return (void*) 0;
 }
@@ -194,12 +194,12 @@ void *consumer_routine(void *arg) {
    * AND the producer threads are all done */
 
   pthread_mutex_lock(&queue_p->lock);
-  printf("1.Consumer lock queue_p->lock\n");
+  //printf("1.Consumer lock queue_p->lock\n");
   pthread_mutex_lock(&g_num_prod_lock);
-  printf("2.Consumer lock g_num_prod_lock\n");
+  //printf("2.Consumer lock g_num_prod_lock\n");
   while(queue_p->front != NULL || g_num_prod > 0) {
     pthread_mutex_unlock(&g_num_prod_lock);
-    printf("3.Consumer unlock g_num_prod_lock\n");
+    //printf("3.Consumer unlock g_num_prod_lock\n");
 
     if (queue_p->front != NULL) {
 
@@ -213,7 +213,7 @@ void *consumer_routine(void *arg) {
 
       queue_p->front = queue_p->front->next;
       pthread_mutex_unlock(&queue_p->lock);
-      printf("4.Consumer unlock queue_p->lock\n");
+      //printf("4.Consumer unlock queue_p->lock\n");
 
       /* Print the character, and increment the character count */
       printf("%c", prev_node_p->c);
@@ -222,7 +222,7 @@ void *consumer_routine(void *arg) {
     }
     else { /* Queue is empty, so let some other thread run */
       pthread_mutex_unlock(&queue_p->lock);
-      printf("5.Consumer unlock queue_p->lock\n");
+      //printf("5.Consumer unlock queue_p->lock\n");
       sched_yield();
     }
 
@@ -237,10 +237,10 @@ void *consumer_routine(void *arg) {
   }
 
   pthread_mutex_unlock(&g_num_prod_lock);
-  printf("6.Consumer unlock g_num_prod_lock\n");
+  //printf("6.Consumer unlock g_num_prod_lock\n");
   pthread_mutex_unlock(&queue_p->lock);    
-  printf("7.Consumer unlock queue_p->lock\n");
-  printf("The final count is %ld\n",*count);
+  //printf("7.Consumer unlock queue_p->lock\n");
+  //printf("The final count is %ld\n",*count);
   
   return count;
 }
