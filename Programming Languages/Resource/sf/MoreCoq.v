@@ -400,7 +400,17 @@ Theorem plus_n_n_injective : forall n m,
 Proof.
   intros n. induction n as [| n'].
     (* Hint: use the plus_n_Sm lemma *)
-    (* FILL IN HERE *) Admitted.
+    Case" n = 0".
+    intros. destruct m as [ | m'].
+    reflexivity. inversion H. (*What exactly happen in this inversion*)
+    Case "n = n'".
+    intros. destruct m as [ | m'].
+    inversion H.
+    rewrite <- plus_n_Sm in H. rewrite <- plus_n_Sm in H. 
+    inversion H. apply IHn' in H1. apply f_equal.
+    assumption.
+Qed.
+
 (** [] *)
 
 (* ###################################################### *)
@@ -546,7 +556,25 @@ Proof.
 Theorem beq_nat_true : forall n m,
     beq_nat n m = true -> n = m.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros n. induction n as [ | n'].
+  Case "n = 0".
+    intros. destruct m as [ | m'].
+    reflexivity.
+    inversion H.
+  Case "n = n'".
+    intros.
+    (*apply IHn' in H.*)
+    destruct m as [ | m'].
+    inversion H(*What happened here?*).
+    (*
+    apply f_equal.
+    apply IHn'.
+    rewrite <- H.
+    reflexivity.*)
+    apply IHn' in H.
+    rewrite -> H.
+    reflexivity.
+Qed.
 (** [] *)
 
 (** **** Exercise: 2 stars, advanced (beq_nat_true_informal)  *)
@@ -719,7 +747,21 @@ Theorem index_after_last: forall (n : nat) (X : Type) (l : list X),
      length l = n ->
      index n l = None.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros n X l. generalize dependent n.
+  induction l as [ |l'].
+  Case "l = nil".
+  destruct n as [ |n'].
+  intros. simpl. reflexivity.
+  intros. simpl. reflexivity.
+  Case "l = l'".
+  destruct n as [ |n'].
+  intros. simpl. inversion H.
+  intros. simpl in H.
+  simpl. (* Can I use the apply f_equal in H.*)
+  rewrite -> IHl.
+  reflexivity. inversion H.
+  reflexivity.
+Qed.
 (** [] *)
 
 (** **** Exercise: 3 stars, advanced, optional (index_after_last_informal)  *)
@@ -778,14 +820,14 @@ Theorem double_induction: forall (P : nat -> nat -> Prop),
   (forall m n, P m n -> P (S m) (S n)) ->
   forall m n, P m n.
 Proof.
-  intros. generalize dependent n.
-  induction m as [ | m'].
-  Case "m = 0". induction n as [ | n'].
-  assumption. 
-  apply H1 in IHn'. assumption.
-  Case "m  = m'". induction n as [ | n'].
-  apply H0 in IHm'. assumption.
-  apply H2. apply IHm'.
+  intros. generalize dependent n. induction m as [ | m'].
+  Case "m = 0". induction n as[ | n'].
+  assumption.
+  apply H1 in IHn'.
+  assumption.
+  Case "m = m'". induction n as [ | n'].
+  apply H0 in IHm'.
+  assumption. apply H2. apply IHm'.
 Qed.
   
 (** [] *)
@@ -844,21 +886,11 @@ Theorem combine_split : forall X Y (l : list (X * Y)) l1 l2,
   split l = (l1, l2) ->
   combine l1 l2 = l.
 Proof.
-  intros X Y l1.
-  induction l1 as [ | x l' ].
-  Case "l = nil".
-    intros. simpl in H. inversion H. reflexivity.
-  Case "l = x l'".
-    intros. simpl in H. destruct x. destruct (split l').
-      destruct l1 as [ | x1' l1'].
-      SCase "l1 = nil". destruct l2 as [ | x2' l2'].
-        inversion H.
-        inversion H.
-      SCase "l1 = x1' l1'". destruct l2 as [| x2' l2'].
-        inversion H.
-        simpl. rewrite -> IHl'. inversion H. reflexivity.
-        inversion H. reflexivity.
-Qed.
+  SearchAbout split.
+  intros. induction l as [ | n' l'].
+  destruct (combine l1 l2) as[ | ].
+  reflexivity. 
+  
 (** [] *)
 
 (** Sometimes, doing a [destruct] on a compound expression (a
@@ -1082,16 +1114,7 @@ Theorem filter_exercise : forall (X : Type) (test : X -> bool)
      filter test l = x :: lf ->
      test x = true.
 Proof.
-  intros. generalize dependent x. generalize dependent lf.
-  induction l as [ | x' l'].
-  Case "l = nil". simpl. intros.
-    inversion H.
-  Case "l = x' l'". simpl. intros. destruct (test x') eqn: H0.
-    SCase "test x'= true".
-      inversion H. rewrite <- H2. assumption.
-    SCase "test x' = false".
-      apply IHl' in H. apply H.
-Qed.
+  (* FILL IN HERE *) Admitted.
 (** [] *)
 
 (** **** Exercise: 4 stars, advanced (forall_exists_challenge)  *)
@@ -1120,36 +1143,8 @@ Qed.
     Prove theorem [existsb_existsb'] that [existsb'] and [existsb] have
     the same behavior.
 *)
-Fixpoint forallb {X:Type} (f: X->bool) (l: list X) : bool :=
-  match l with
-    | []      => true
-    | h :: t => andb (f h) (forallb f t)
-  end.
 
-Fixpoint existsb {X:Type} (f:X->bool) (l: list X) : bool :=
-  match l with
-    | []      => false
-    | h :: t => orb (f h) (existsb f t)
-  end.
-
-Definition existsb' {X:Type} (f:X->bool) (l: list X) : bool :=
-  negb( forallb (fun x => negb (f x)) l).
-
-Theorem existsb_existsb': forall (X:Type) (f:X->bool) (l: list X),
-  existsb' f l = existsb f l.
-Proof.
-  intros X. induction l as [ | x' l'].
-  Case "l = nil".
-    simpl. reflexivity.
-  Case "l = x' l'".
-    simpl. unfold existsb'. destruct (f x') eqn: H0.
-    SCase "f x' = true".
-      simpl. rewrite-> H0. simpl. reflexivity.
-    SCase "f x' = false".
-      simpl. rewrite-> H0. simpl. rewrite <- IHl'.
-      unfold existsb'.
-      reflexivity.
-Qed.
+(* FILL IN HERE *)
 (** [] *)
 
 (** $Date: 2014-12-31 16:01:37 -0500 (Wed, 31 Dec 2014) $ *)
