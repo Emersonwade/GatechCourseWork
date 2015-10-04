@@ -754,7 +754,7 @@ Proof.
   Case "b = b''".
     simpl. reflexivity.
 Qed.
-
+(*
 Theorem normalizeproof : forall (b : bin) (n : nat),
  normalize b = nat_to_bin (bin_to_nat b).
 Proof.
@@ -762,9 +762,9 @@ Proof.
   Case "b = B".
     simpl. reflexivity.
   Case "b = TB b'".
-    simpl. rewrite <- plus_n_O.
+    simpl. (*rewrite <- plus_n_O.*)
     intros. 
-    simpl. intros. rewrite -> normalizehelper.
+    simpl. intros. (*rewrite -> normalizehelper.*)
     rewrite <- IHb'.
     unfold doublebin.
     reflexivity.
@@ -774,7 +774,7 @@ Proof.
     rewrite -> IHb''. rewrite -> normalizehelper4.
     reflexivity.
 Qed.
-
+*)
 (** [] *)
 
 (* ###################################################################### *)

@@ -400,7 +400,17 @@ Theorem plus_n_n_injective : forall n m,
 Proof.
   intros n. induction n as [| n'].
     (* Hint: use the plus_n_Sm lemma *)
-    (* FILL IN HERE *) Admitted.
+    Case" n = 0".
+    intros. destruct m as [ | m'].
+    reflexivity. inversion H. (*What exactly happen in this inversion*)
+    Case "n = n'".
+    intros. destruct m as [ | m'].
+    inversion H.
+    rewrite <- plus_n_Sm in H. rewrite <- plus_n_Sm in H. 
+    inversion H. apply IHn' in H1. apply f_equal.
+    assumption.
+Qed.
+
 (** [] *)
 
 (* ###################################################### *)
@@ -546,7 +556,25 @@ Proof.
 Theorem beq_nat_true : forall n m,
     beq_nat n m = true -> n = m.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros n. induction n as [ | n'].
+  Case "n = 0".
+    intros. destruct m as [ | m'].
+    reflexivity.
+    inversion H.
+  Case "n = n'".
+    intros.
+    (*apply IHn' in H.*)
+    destruct m as [ | m'].
+    inversion H(*What happened here?*).
+    (*
+    apply f_equal.
+    apply IHn'.
+    rewrite <- H.
+    reflexivity.*)
+    apply IHn' in H.
+    rewrite -> H.
+    reflexivity.
+Qed.
 (** [] *)
 
 (** **** Exercise: 2 stars, advanced (beq_nat_true_informal)  *)
@@ -719,7 +747,21 @@ Theorem index_after_last: forall (n : nat) (X : Type) (l : list X),
      length l = n ->
      index n l = None.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros n X l. generalize dependent n.
+  induction l as [ |l'].
+  Case "l = nil".
+  destruct n as [ |n'].
+  intros. simpl. reflexivity.
+  intros. simpl. reflexivity.
+  Case "l = l'".
+  destruct n as [ |n'].
+  intros. simpl. inversion H.
+  intros. simpl in H.
+  simpl. (* Can I use the apply f_equal in H.*)
+  rewrite -> IHl.
+  reflexivity. inversion H.
+  reflexivity.
+Qed.
 (** [] *)
 
 (** **** Exercise: 3 stars, advanced, optional (index_after_last_informal)  *)
@@ -778,7 +820,16 @@ Theorem double_induction: forall (P : nat -> nat -> Prop),
   (forall m n, P m n -> P (S m) (S n)) ->
   forall m n, P m n.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros. generalize dependent n. induction m as [ | m'].
+  Case "m = 0". induction n as[ | n'].
+  assumption.
+  apply H1 in IHn'.
+  assumption.
+  Case "m = m'". induction n as [ | n'].
+  apply H0 in IHm'.
+  assumption. apply H2. apply IHm'.
+Qed.
+  
 (** [] *)
 
 
@@ -835,7 +886,11 @@ Theorem combine_split : forall X Y (l : list (X * Y)) l1 l2,
   split l = (l1, l2) ->
   combine l1 l2 = l.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  SearchAbout split.
+  intros. induction l as [ | n' l'].
+  destruct (combine l1 l2) as[ | ].
+  reflexivity. 
+  
 (** [] *)
 
 (** Sometimes, doing a [destruct] on a compound expression (a
