@@ -607,9 +607,10 @@ Abort.
 Theorem contrapositive : forall P Q : Prop,
   (P -> Q) -> (~Q -> ~P).
 Proof.
-  (* FILL IN HERE *) Admitted.
-(** [] *)
-
+  intros P Q H H1. unfold not. intros H2.
+  destruct H1. apply H.
+  apply H2.
+Qed.
 (** **** Exercise: 1 star (not_both_true_and_false)  *)
 Theorem not_both_true_and_false : forall P : Prop,
   ~ (P /\ ~P).
@@ -659,7 +660,96 @@ Definition de_morgan_not_and_not := forall P Q:Prop,
 Definition implies_to_or := forall P Q:Prop, 
   (P->Q) -> (~P\/Q). 
 
-(* FILL IN HERE *)
+Inductive classical_ax : Prop -> Prop :=
+| ax_peirce : classical_ax peirce
+| ax_classic : classical_ax classic
+| ax_exm : classical_ax excluded_middle
+| ax_de_morgan : classical_ax de_morgan_not_and_not
+| ax_impies_or : classical_ax implies_to_or.
+
+(*
+************************ *************
+I don't know why we need this inductive and therom? Why not just prove something
+like peirce->classic.
+Theorem classical_equiv :
+  forall P Q : Prop, classical_ax P -> classical_ax Q -> (P -> Q).
+**************************************
+Also I am not clear with meaning of destruct (H P). H is hyperthesis and P is a prop.
+**************************************
+*)
+
+(*First create an edge from peirce to classic*)
+Theorem p_to_c : peirce->classic.
+Proof.
+  unfold peirce. unfold classic.
+  intros HP P H1. unfold not in H1.
+  apply HP with (Q := False).
+  intros H2. apply H1 in H2. inversion H2.
+Qed.
+
+(*Then create an edge from classic to excluded_middle*)
+Lemma c_to_e_Helper : 
+ forall P Q, ~ (P \/ Q) -> (~ P) /\ (~ Q).
+Proof.
+  intros P Q H. split. 
+  intros p. apply H. left. apply p.
+  intros q. apply H. right. apply q.
+Qed.
+
+Theorem c_to_e : classic->excluded_middle.
+Proof.
+  unfold classic. unfold excluded_middle.
+  intros H P. 
+  apply H. intros H1. apply c_to_e_Helper in H1.
+  destruct H1. apply H in H1. apply H0 in H1.
+  apply H1.
+Qed.
+
+(*Then first I want to create an edge between e and d, but it is really hard.
+So I try to create an edge between c and d*)
+Theorem c_to_d : classic -> de_morgan_not_and_not.
+Proof.
+  unfold classic. unfold de_morgan_not_and_not.
+  intros H P Q H1. apply H. intros H2. apply c_to_e_Helper in H2.
+  apply H1 in H2. apply H2.
+Qed.
+(*Then If I can get e_to_c, then it will prove that e_to_d*)
+Theorem e_to_c : excluded_middle -> classic.
+Proof.
+  unfold excluded_middle. unfold classic.
+  intros H P H1. destruct (H P).
+  apply H0. apply H1 in H0.
+  inversion H0.
+Qed.
+(*Proof of e_to_d*)
+Theorem e_to_d : excluded_middle -> de_morgan_not_and_not.
+Proof.
+  intros H.
+  apply e_to_c in H. apply c_to_d in H.
+  apply H.
+Qed.
+
+(*Next edge should be the d_to_i*)
+Theorem d_to_i : de_morgan_not_and_not -> implies_to_or.
+Proof.
+  unfold de_morgan_not_and_not. unfold implies_to_or.
+  intros H P Q H1. apply H. intros p. destruct p.
+  unfold not in H0. apply H0. intros H3.
+  apply H1 in H3. apply H2. apply H3.
+Qed.
+
+(*Finally if we can prove the i_to_p, then there will be a ring between these
+five classic theroms*)
+Theorem i_to_p : implies_to_or -> peirce.
+Proof.
+  unfold implies_to_or. unfold peirce.
+  intros H P Q H1. destruct (H P P (fun x => x)). 
+  apply H1. intros H2. apply H0 in H2. inversion H2.
+  apply H0.
+Qed.
+(*So finally we can get a ring from p_to_c c_to_e e_to_d d_to_i i_to_p
+these five theroms are equivalent*)
+
 (** [] *)
 
 (** **** Exercise: 3 stars (excluded_middle_irrefutable)  *)

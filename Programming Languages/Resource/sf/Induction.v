@@ -762,7 +762,7 @@ Proof.
   Case "b = B".
     simpl. reflexivity.
   Case "b = TB b'".
-    simpl. rewrite <- plus_n_O.
+    simpl. (*rewrite <- plus_n_O.
     intros. 
     simpl. intros. rewrite -> normalizehelper.
     rewrite <- IHb'.
@@ -773,7 +773,8 @@ Proof.
     rewrite -> normalizehelper3.
     rewrite -> IHb''. rewrite -> normalizehelper4.
     reflexivity.
-Qed.
+*)
+Abort.
 
 (** [] *)
 

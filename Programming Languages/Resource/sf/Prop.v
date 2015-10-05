@@ -382,7 +382,14 @@ Qed.
 Theorem ev_sum : forall n m,
    ev n -> ev m -> ev (n+m).
 Proof. 
-  (* FILL IN HERE *) Admitted.
+  intros n m H1 H2.
+  induction H1 as [ | n'].
+  Case "n = 0".
+    simpl. apply H2.
+  Case "n = n'".
+    simpl. apply ev_SS.
+    apply IHev.
+Qed.
 (** [] *)
 
 
@@ -479,7 +486,15 @@ Proof.
 Theorem ev_ev__ev : forall n m,
   ev (n+m) -> ev n -> ev m.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros n m H1 H2.
+  induction H2 as [ | n'].
+  Case "H2 = 0".
+    simpl in H1. apply H1.
+  Case "H2 = n'".
+    simpl in H1. inversion H1. apply IHev in H0.
+    apply H0.
+Qed.
+    
 (** [] *)
 
 (** **** Exercise: 3 stars, optional (ev_plus_plus)  *)
@@ -585,7 +600,73 @@ Qed.
        forall l, pal l -> l = rev l.
 *)
 
-(* FILL IN HERE *)
+Inductive pal {X:Type} : list X -> Prop :=
+  | pal_nil : pal []
+  | pal_one : forall (x: X), pal [x]
+  | pal_cons : forall (x: X) (l: list X), pal l -> pal (x :: l ++ [x]).
+
+Theorem snoc_append : forall {X:Type} (l: list X) (n: X),
+  snoc l n = l ++ [n].
+Proof.
+  intros. induction l as [ | n' l'].
+  Case "l = nil".
+    simpl. reflexivity.
+  Case "l = n' l'".
+    simpl. rewrite -> IHl'. reflexivity.
+Qed.
+
+Theorem app_assoc : forall {X:Type} (l1 l2 l3: list X),
+  (l1 ++ l2) ++ l3 = l1 ++ (l2 ++ l3).
+Proof.
+  intros. induction l1 as [ | n' l'].
+  Case "l1 = nil".
+    simpl. reflexivity.
+  Case "l1 = n' l'".
+    simpl. rewrite -> IHl'. reflexivity.
+Qed.
+
+Theorem pal_app_rev : forall X (l: list X),
+  pal (l ++ rev l).
+Proof.
+  intros. induction l as [ | x l']. 
+  Case "l = nil". simpl. apply pal_nil. 
+  Case "l = x :: l'". simpl.
+    rewrite snoc_append. rewrite <- app_assoc.
+    apply pal_cons. apply IHl'.
+Qed.
+
+Theorem rev_equal : forall X (l: list X) (n : X),
+  n :: (rev l) = rev (snoc l n).
+Proof.
+  intros. induction l as [ | n' l'].
+  Case "l = nil".
+    simpl. reflexivity.
+  Case "l = n l'".
+    simpl. intros. rewrite <- IHl'.
+    reflexivity.
+Qed.
+
+Theorem rev_append : forall X (l: list X) (x: X),
+  rev (l ++ [x]) = [x] ++ rev l.
+Proof.
+  intros. induction l as [ | x' l'].
+  Case "l = nil".
+    reflexivity.
+  Case "l = x'l'".
+    simpl. rewrite->IHl'. rewrite->snoc_append. simpl.
+    rewrite <-snoc_append.
+  reflexivity.
+Qed.
+ 
+Theorem pal_rev:  forall X (l:list X), pal l -> l = rev l.
+  intros. induction H. 
+  Case "pal l = nil". reflexivity. 
+  Case "pal l = [x]". reflexivity.
+  Case "pal l = x :: l' ++ x". simpl. 
+    rewrite snoc_append. rewrite-> rev_append.
+    rewrite <- IHpal. reflexivity.
+Qed.
+
 (** [] *)
 
 (* Again, the converse direction is much more difficult, due to the
@@ -689,6 +770,8 @@ Inductive next_even : nat -> nat -> Prop :=
 (** **** Exercise: 2 stars (total_relation)  *)
 (** Define an inductive binary relation [total_relation] that holds
     between every pair of natural numbers. *)
+Inductive total_relation (m n:nat): Prop :=
+  | tr : total_relation m n.
 
 (* FILL IN HERE *)
 (** [] *)
@@ -843,7 +926,47 @@ End R.
       Hint: choose your induction carefully!
 *)
 
-(* FILL IN HERE *)
+Inductive subseq : list nat -> list nat -> Prop :=
+  | sub_empty : forall l : list nat, subseq [] l
+  | sub_both : forall (x:nat) (s l: list nat), subseq s l -> subseq (x :: s) (x :: l)
+  | sub_next : forall (x:nat) (s l: list nat), subseq s l -> subseq s (x :: l).
+
+Theorem subseq_refl : forall l: list nat, subseq l l.
+Proof.
+  intros. induction l as [| x'l'].
+  Case "l = nil".
+    apply sub_empty.
+  Case "l = x'l'".
+    apply sub_both. apply IHl.
+Qed.
+
+Theorem subseq_app : forall (l1 l2 l3: list nat),
+  subseq l1 l2 -> subseq l1 (l2 ++ l3).
+Proof. 
+intros.
+  induction H.
+  apply sub_empty.
+  simpl. apply sub_both. apply IHsubseq.
+  simpl. apply sub_next. apply IHsubseq.
+Qed.
+
+Theorem subseq_trans : forall l1 l2 l3 : list nat,
+  subseq l1 l2 -> subseq l2 l3 -> subseq l1 l3.
+Proof.
+  intros. generalize dependent l1. 
+  induction H0.
+  Case "l2 = nil".
+    intros. inversion H.  apply sub_empty.
+  Case "l2 l3 both".
+    intros. inversion H. apply sub_empty.
+    apply sub_both.  
+    apply IHsubseq. apply H3.
+    apply IHsubseq in H3.
+    apply sub_next. apply H3.
+  Case "l2 l3 next".
+    intros. apply IHsubseq in H.
+    apply sub_next. apply H.
+Qed.
 (** [] *)
 
 (** **** Exercise: 2 stars, optional (R_provability)  *)
