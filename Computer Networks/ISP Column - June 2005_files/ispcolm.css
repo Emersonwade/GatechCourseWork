@@ -1,0 +1,205 @@
+body {
+     text-align: center;
+     background-color: white;
+     font-family: Verdana, Arial, Helvetica, sans-serif;
+     font-size: 12px;
+      background-image:  url("../images/graphics/book.jpg")}
+
+#wrapper {
+      text-align: justify;
+	width:600px;
+      margin-left: auto;
+     margin-right: auto;
+}
+
+
+ a:link {color: #660066; text-decoration: none}
+ a:active {color: #0000ee; text-decoration: none}
+ a:visited {color: #666633; text-decoration: none}
+ 
+
+h1 {color: #CC6633;
+       font-weight: bold;
+	   font-size: 14px; 
+	   margin-bottom: -6px}
+	   
+h2 {color: #CC6633;
+       font-weight: bold;
+	   font-size: 14px; 
+	   margin-bottom: 0.8px}
+	   
+h3,h4,h5,h6 { color: rgb(0,28,140); }
+ 
+.tagline {
+	font-style: italic;
+	font-size: 80%;
+	line-height: 1.05em;
+}
+	   
+.banner {float:right;
+         width:90%;
+		 text-align: right;}
+		 
+.divider {clear:right;}
+	   
+.title { clear:right;}
+  
+.date {color: #666666;
+       font-size: 10px; }
+
+.sidenote {
+    color: rgb(80,80,80);
+	background-color: #F5F0DA;
+	margin-right: 5px;
+	margin-left: 165px;
+	padding: 10px;
+	border: 1px #DFCE9D solid 
+    }
+
+.sidenote1 {
+    color: rgb(80,80,80);
+	background-color: #F5F0DA;
+	margin-right: 5px;
+	margin-left: 25px;
+	padding: 15px;
+	border: 1px #DFCE9D solid 
+    }
+
+p.codenote {
+    color: rgb(100,100,100);
+    background-color: rgb(235,235,235);
+    margin-left: 40px;
+    margin-right: 2px;
+	font-family: "Lucida Console", "Courier New", Courier;
+	font-size: smaller;    
+    }
+    
+p.sidebar {
+    color: rgb(80,80,80);
+	background-color: #F5F0DA;
+	margin-right: 5px;
+	margin-left: 165px;
+	padding: 12px;
+	border: 1px #DFCE9D solid 
+    }
+p.code {
+	background-color: #CCCCCC;
+	margin-right: 5px;
+	margin-left: 20px;
+	padding: 5px;
+	border: 1px solid #666666;
+	font-family: "Courier New", Courier, mono;
+	font-size: smaller;
+    }
+p.comment {
+	background-color: #F3F3F3;
+	margin-right: 5px;
+	margin-left: 20px;
+	padding: 5px;
+    }
+
+ p.hang {text-indent: -3em; margin-left:3em}
+ p.indent {margin-left:3em}
+ p.hang2 {text-indent:-2em; margin-left:2em}
+ p.indent2 {margin-left:2em}
+  tt { color: brown }
+  em { font-style: italic; font-weight: bold }
+  strong { font-weight: bold }
+  .navbar { text-align: center }
+  div.box { border: solid; border-width: thin; width: 100%; padding: 0.2em; }
+  div.color {
+    background-color: rgb(209,209,255);
+    color: rgb(0,28,140);
+    padding: 0.5em;
+    border: none;
+    width: 100%;
+  }
+
+  pre.code {
+     color: yellow;
+     margin-left: 5%;
+     background-color: navy;
+     white-space: pre;}
+	 
+  pre.codenote {
+    color: rgb(100,100,100);
+    background-color: rgb(235,235,235);
+    margin-left: 40px;
+    margin-right: 2px;
+	font-family: "Lucida Console", "Courier New", Courier;
+	font-size: smaller;    
+    }
+
+pre.snap {
+    color: #000000;
+	background-color: #E0E0E0;
+	margin-right: 5px;
+	margin-left: 20px;
+	padding: 5px;
+	border: 1px solid #666666;
+	font-family: "Courier New", Courier, mono;
+    }
+  div.indent{ margin-left: 5%;}
+  
+  pre.bad { color: rgb(192, 101, 101) }
+  
+  p.changed {
+    padding-left: 0.2em;
+    border-left: solid;
+    border-top: none;
+    border-bottom: none;
+    border-right: none;
+    border-left-width: thin;
+    border-color: red;
+  }
+  p.excerpt {
+    color: rgb(110,110,130);
+	background-color: #FFF9EA;
+	padding: 12px }
+	
+  p.response {
+	margin-left: 25px}
+	
+  .dropcap {
+     float: left;
+     font: bold 1.4em "Times New Roman", serif;
+     color: rgb(51, 0, 102);
+     background: rgb(255, 255, 153);}
+	 
+  td.shaded { background: rgb(255, 255, 153) }
+  th.shaded { background: rgb(204, 204, 153) }
+  
+.rightbanner {float:right;
+         width:98%;
+		 text-align: right;}
+
+table {
+     background-color: white;
+     font-family: Verdana, Arial, Helvetica, sans-serif;
+     font-size: 12px;
+     }
+     
+table.sample {
+        border-width: 1px;
+        border-spacing: ;
+        border-style: none;
+        border-color: gray;
+        border-collapse: collapse;
+        background-color: white;
+}
+table.sample th {
+        border-width: 1px;
+        padding: 2px;
+        border-style: inset;
+        border-color: gray;
+        background-color: white;
+        -moz-border-radius: ;
+}
+table.sample td {
+        border-width: 1px;
+        padding: 2px;
+        border-style: inset;
+        border-color: gray;
+        background-color: white;
+        -moz-border-radius: ;
+}
