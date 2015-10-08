@@ -1,4 +1,4 @@
-DIGEST 399a43a793f3577506300b9a39e0e9f0
+DIGEST 2e57c76186cf3fd21ff2e538ce64bd47
 FLists
 R61:69 Induction <> <> lib
 mod 80:86 <> NatList
@@ -1222,5 +1222,5 @@ R37879:37885 Basics <> beq_nat def
 R37889:37889 Lists <> n var
 R37887:37887 Lists <> m var
 R37893:37897 Basics <> false constr
-R37990:37999 Lists NatList.Dictionary <> mod
-R38007:38013 Lists NatList <> mod
+R37990:37999 Lists Dictionary <> mod
+R38007:38013 Lists <> <> mod

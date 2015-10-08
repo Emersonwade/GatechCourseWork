@@ -659,6 +659,7 @@ Proof.
 Qed.
  
 Theorem pal_rev:  forall X (l:list X), pal l -> l = rev l.
+Proof.
   intros. induction H. 
   Case "pal l = nil". reflexivity. 
   Case "pal l = [x]". reflexivity.
@@ -677,7 +678,13 @@ lack of evidence. *)
     that
      forall l, l = rev l -> pal l.
 *)
-
+Theorem palindrome_converse: forall X (l:list X), l = rev l -> pal l.
+Proof.
+  intros. induction l as [|x l'].
+  Case "l = nil".
+    apply pal_nil.
+  Case "l = xl'".
+    
 (* FILL IN HERE *)
 (** [] *)
 
