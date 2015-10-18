@@ -1,0 +1,73 @@
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+CC	Makefile	/^CC = gcc$/;"	m
+CFLAGS	Makefile	/^CFLAGS = -I$(MPICH)\/include$/;"	m
+CPPFLAGS	Makefile	/^CPPFLAGS = -g -Wall $(OMPFLAGS)$/;"	m
+LDFLAGS	Makefile	/^LDFLAGS = -g -Wall$/;"	m
+LDLIBS	Makefile	/^LDLIBS = $(OMPLIBS)$/;"	m
+MPICC	Makefile	/^MPICC = mpicc$/;"	m
+MPICH	Makefile	/^MPICH = \/usr\/lib64\/openmpi\/1.4-gcc$/;"	m
+OMPFLAGS	Makefile	/^OMPFLAGS = -fopenmp$/;"	m
+OMPLIBS	Makefile	/^OMPLIBS = -lgomp$/;"	m
+combinedbarrier	combinedbarrier.c	/^void combinedbarrier(int num_process, int num_threads, int rank)$/;"	f
+combinedbarrier_finalize	combinedbarrier.c	/^void combinedbarrier_finalize(){$/;"	f
+combinedbarrier_init	combinedbarrier.c	/^void combinedbarrier_init(int num_process, int num_threads, int rank)$/;"	f
+COMBINED_BARRIER_H	combinedbarrier.h	2;"	d
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+MCSmpiNode	mcs_mpi.c	/^} MCSmpiNode;$/;"	t	typeref:struct:mcs_node_mpi	file:
+arrivalchildpointer	mcs_mpi.c	/^	int arrivalchildpointer[4];$/;"	m	struct:mcs_node_mpi	file:
+arrivalparentpointer	mcs_mpi.c	/^	int arrivalparentpointer;$/;"	m	struct:mcs_node_mpi	file:
+havechild	mcs_mpi.c	/^	}havechild;$/;"	m	struct:mcs_node_mpi	typeref:union:mcs_node_mpi::__anon1	file:
+mcs_node_mpi	mcs_mpi.c	/^typedef struct mcs_node_mpi$/;"	s	file:
+mpi_mcs_init	mcs_mpi.c	/^void mpi_mcs_init(int num_process, int rank) {$/;"	f
+mpi_mcsbarrier	mcs_mpi.c	/^void mpi_mcsbarrier(int num_process, int rank) {$/;"	f
+mpi_mcsbarrier_finalize	mcs_mpi.c	/^void mpi_mcsbarrier_finalize() {$/;"	f
+mynode	mcs_mpi.c	/^static MCSmpiNode *mynode;$/;"	v	file:
+pack	mcs_mpi.c	/^		uint32_t pack;$/;"	m	union:mcs_node_mpi::__anon1	file:
+unit	mcs_mpi.c	/^		uint8_t unit[4];$/;"	m	union:mcs_node_mpi::__anon1	file:
+wakeupchildpointer	mcs_mpi.c	/^	int wakeupchildpointer[2];$/;"	m	struct:mcs_node_mpi	file:
+wakeupparentpointer	mcs_mpi.c	/^	int wakeupparentpointer;$/;"	m	struct:mcs_node_mpi	file:
+MCSompNode	mcs_openmp.c	/^}MCSompNode __attribute__((aligned(8)));$/;"	t	typeref:struct:mcs_node_omp	file:
+childnotready	mcs_openmp.c	/^	}childnotready;$/;"	m	struct:mcs_node_omp	typeref:union:mcs_node_omp::__anon2	file:
+childpointer	mcs_openmp.c	/^	bool *childpointer[2];$/;"	m	struct:mcs_node_omp	file:
+dummy	mcs_openmp.c	/^	bool dummy;$/;"	m	struct:mcs_node_omp	file:
+havechild	mcs_openmp.c	/^	}havechild;$/;"	m	struct:mcs_node_omp	typeref:union:mcs_node_omp::__anon3	file:
+mcs_node_omp	mcs_openmp.c	/^typedef struct mcs_node_omp$/;"	s	file:
+mp_mcs_init	mcs_openmp.c	/^void mp_mcs_init(int num_threads)$/;"	f
+mp_mcsbarrier	mcs_openmp.c	/^void mp_mcsbarrier(int num_threads) $/;"	f
+mp_mcsbarrier_finalize	mcs_openmp.c	/^void mp_mcsbarrier_finalize()$/;"	f
+nodes	mcs_openmp.c	/^static MCSompNode* nodes = NULL;$/;"	v	file:
+pack	mcs_openmp.c	/^		uint32_t pack;$/;"	m	union:mcs_node_omp::__anon2	file:
+pack	mcs_openmp.c	/^		uint32_t pack;$/;"	m	union:mcs_node_omp::__anon3	file:
+parentpointer	mcs_openmp.c	/^	uint8_t *parentpointer;$/;"	m	struct:mcs_node_omp	file:
+parentsense	mcs_openmp.c	/^	bool parentsense;$/;"	m	struct:mcs_node_omp	file:
+sense	mcs_openmp.c	/^	bool sense;$/;"	m	struct:mcs_node_omp	file:
+unit	mcs_openmp.c	/^		uint8_t unit[4];$/;"	m	union:mcs_node_omp::__anon2	file:
+unit	mcs_openmp.c	/^		uint8_t unit[4];$/;"	m	union:mcs_node_omp::__anon3	file:
+MPIBARRIER_H	mpibarrier.h	2;"	d
+OPENMPBARRIER_H	openmpbarrier.h	2;"	d
+count	sensereversal_openmp.c	/^static int count;$/;"	v	file:
+localsense_list	sensereversal_openmp.c	/^static localsense_t *localsense_list=NULL;$/;"	v	file:
+localsense_t	sensereversal_openmp.c	/^typedef union localsense_t {$/;"	u	file:
+localsense_t	sensereversal_openmp.c	/^}localsense_t;$/;"	t	typeref:union:localsense_t	file:
+lsense	sensereversal_openmp.c	/^	bool lsense;$/;"	m	union:localsense_t	file:
+mp_senserevbarrier	sensereversal_openmp.c	/^void mp_senserevbarrier(int num_threads) {$/;"	f
+mp_senserevbarrier_finalize	sensereversal_openmp.c	/^void mp_senserevbarrier_finalize() {$/;"	f
+mp_senserevbarrier_init	sensereversal_openmp.c	/^void mp_senserevbarrier_init (int num_threads)	{$/;"	f
+sense	sensereversal_openmp.c	/^static bool sense;$/;"	v	file:
+whole	sensereversal_openmp.c	/^	long whole;$/;"	m	union:localsense_t	file:
+main	test_combinedbarrier.c	/^int main(int argc, char **argv)$/;"	f
+threadstime	test_combinedbarrier.c	/^static double threadstime[256];$/;"	v	file:
+timeduration	test_combinedbarrier.c	/^double timeduration(struct timeval t1, struct timeval t2)$/;"	f
+main	test_mpi_mcs.c	/^int main(int argc, char **argv)$/;"	f
+timeduration	test_mpi_mcs.c	/^double timeduration(struct timeval t1, struct timeval t2)$/;"	f
+iterations	test_omp_mcs.c	/^static int iterations;$/;"	v	file:
+main	test_omp_mcs.c	/^int main(int argc, char **argv)$/;"	f
+threadstime	test_omp_mcs.c	/^static double threadstime[256];$/;"	v	file:
+timeduration	test_omp_mcs.c	/^double timeduration(struct timeval t1, struct timeval t2)$/;"	f
+main	test_omp_sensebarrier.c	/^int main(int argc, char **argv)$/;"	f
+threadstime	test_omp_sensebarrier.c	/^static double threadstime[256];$/;"	v	file:
+timeduration	test_omp_sensebarrier.c	/^double timeduration(struct timeval t1, struct timeval t2)$/;"	f
