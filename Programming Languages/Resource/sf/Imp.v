@@ -69,6 +69,9 @@ Inductive bexp : Type :=
   | BLe : aexp -> aexp -> bexp
   | BNot : bexp -> bexp
   | BAnd : bexp -> bexp -> bexp.
+(***************************************
+Why there is no divide function
+****************************************)
 
 (** In this chapter, we'll elide the translation from the
     concrete syntax that a programmer would actually write to these

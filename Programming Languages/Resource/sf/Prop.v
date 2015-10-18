@@ -678,13 +678,43 @@ lack of evidence. *)
     that
      forall l, l = rev l -> pal l.
 *)
+Theorem palindrome_converse': forall X (l : list X) (n : nat) (len : n = length l), l = rev l -> pal l.
+Proof.
+  intros. generalize dependent l. induction n as [| n'].
+  Case "n = 0".
+    intros.
+    inversion len. destruct l as [ nil | x' l'].
+    apply pal_nil. inversion len.
+  Case "n = S n'". destruct l as [ nil| x' l'].
+    simpl. intros. apply pal_nil.
+    intros. inversion len. apply IHn' in H1. destruct H1.
+    apply pal_one. inversion H. apply pal_cons with (l := nil).
+    apply pal_nil.
+Abort.
+
+Theorem pc_Helper: forall X (l : list X) (x: X) (x': X), x' :: l ++ [x] = rev (x' :: l ++ [x]) -> x' = x.
+Proof.
+  intros. induction l as [nil | n' l'].
+    simpl in H. inversion H. apply H2.
+    simpl in H.
+Abort.
+ 
+Theorem pc_Helper2: forall X (l : list X) (x: X) (x': X), x :: l ++ [x'] = rev (x' :: l ++ [x]).
+Proof.
+  intros. induction l as [nil | n' l'].
+  reflexivity.
+  simpl. rewrite -> rev_append. simpl in IHl'. rewrite -> snoc_append in IHl'. simpl in IHl'.
+ Abort.
+
+Theorem pc_Helper3: forall X (l : list X) (x : X), pal l -> x :: l = rev(x :: l) -> pal (x :: l).
+Proof.
+  intros. induction l as [nil | x' l'].
+  apply pal_one.
+Abort.
+
 Theorem palindrome_converse: forall X (l:list X), l = rev l -> pal l.
 Proof.
-  intros. induction l as [|x l'].
-  Case "l = nil".
-    apply pal_nil.
-  Case "l = xl'".
-    
+Admitted.
 (* FILL IN HERE *)
 (** [] *)
 
