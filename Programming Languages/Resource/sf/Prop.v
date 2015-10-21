@@ -307,6 +307,9 @@ Qed.
 Theorem gorgeous_sum : forall n m,
   gorgeous n -> gorgeous m -> gorgeous (n + m).
 Proof.
+  intros n m H H1. induction H as [|n'|n'].
+  simpl. apply H1.
+  simpl. apply g_plus3. apply IHgorgeous.
  (* FILL IN HERE *) Admitted.
 (** [] *)
 

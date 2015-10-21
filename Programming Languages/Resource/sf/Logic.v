@@ -80,14 +80,9 @@ Qed.
 
 Theorem test2 : forall (X : Type) (f : nat -> X) (x : nat), f x = f x.
 Proof.
-  intros.
-(*
-  destruct f.
-  reflexivity.
+  intros. apply f_equal.
   reflexivity.
 Qed.
-*)
-Abort.
 
 Lemma silly : 0 * 3 = 0.
 Proof. reflexivity. Qed.
@@ -233,8 +228,9 @@ Proof.
 Theorem proj2 : forall P Q : Prop, 
   P /\ Q -> Q.
 Proof.
-  (* FILL IN HERE *) Admitted.
-(** [] *)
+  intros. destruct H.
+  apply H0.
+Qed.
 
 Theorem and_commut : forall P Q : Prop, 
   P /\ Q -> Q /\ P.
@@ -261,12 +257,10 @@ Qed.
 Theorem and_assoc : forall P Q R : Prop, 
   P /\ (Q /\ R) -> (P /\ Q) /\ R.
 Proof.
-  intros P Q R H.
-  destruct H as [HP [HQ HR]].
-(* FILL IN HERE *) Admitted.
-(** [] *)
-
-
+  intros P Q R H. destruct H as [H1 H2]. destruct H2 as [H3 H4].
+  split. split.
+  apply H1. apply H3. apply H4.
+Qed.
 
 (* ###################################################### *)
 (** * Iff *)
@@ -303,7 +297,8 @@ Proof.
 Theorem iff_refl : forall P : Prop, 
   P <-> P.
 Proof. 
-  (* FILL IN HERE *) Admitted.
+  intros. split. intros. apply H. intros. apply H.
+Qed.
 
 Theorem iff_trans : forall P Q R : Prop, 
   (P <-> Q) -> (Q <-> R) -> (P <-> R).
@@ -406,7 +401,14 @@ Proof.
 Theorem or_distributes_over_and_2 : forall P Q R : Prop,
   (P \/ Q) /\ (P \/ R) -> P \/ (Q /\ R).
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros P Q R H. destruct H as [H1 H2].
+  destruct H1 as [H3 | H4].
+  left. apply H3.
+  destruct H2.
+  left. apply H.
+  right. split. apply H4.
+  apply H.
+Qed.
 (** [] *)
 
 (** **** Exercise: 1 star, optional (or_distributes_over_and)  *)
@@ -457,7 +459,14 @@ Proof.
 Theorem orb_prop : forall b c,
   orb b c = true -> b = true \/ c = true.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros. destruct b.
+  destruct c.
+  left. reflexivity.
+  left. reflexivity.
+  right. destruct c.
+  reflexivity.
+  inversion H.
+Qed.
 
 (** **** Exercise: 2 stars, optional (orb_false_elim)  *)
 Theorem orb_false_elim : forall b c,
@@ -760,8 +769,10 @@ we would have both [~ (P \/ ~P)] and [~ ~ (P \/ ~P)], a contradiction. *)
 
 Theorem excluded_middle_irrefutable:  forall (P:Prop), ~ ~ (P \/ ~ P).  
 Proof.
-  (* FILL IN HERE *) Admitted.
-
+  intros. unfold not.
+  intros. apply H.
+  right. intros. apply H. left. apply H0.
+Qed.
 
 (* ########################################################## *)
 (** ** Inequality *)
@@ -793,6 +804,7 @@ Theorem quiz1 : forall (X : Type) ( a b : X),
   (a = b) /\ (a <> b) -> False.
 Proof.
   intros. destruct H as [H0 H1].
+  apply H1.
 (*
   apply H1.
   apply H0.
@@ -809,13 +821,15 @@ Theorem quiz2 : forall (P Q : Prop),
   P \/ Q -> ~~(P \/ Q).
 Proof.
   intros P Q H H1.
+  apply H1.
 (*******************************)
 Abort.
 
 Theorem quiz3 : forall (P Q : Prop),
   P \/ Q -> ~~P \/ ~~Q.
 Proof.
-  intros.
+  intros. destruct H as [H1 | H2].
+  left. unfold not. intros. apply H. apply H1.
 Abort.
 
 (** *** *)
@@ -840,9 +854,14 @@ Proof.
 Theorem beq_nat_false : forall n m,
   beq_nat n m = false -> n <> m.
 Proof.
-  (* FILL IN HERE *) Admitted.
-(** [] *)
-
+    intros n m.
+  unfold not.
+  unfold not. intros.
+  rewrite H0 in H.
+  induction  m in H. simpl in H. inversion H.
+  simpl in H.  rewrite H in IHn0.  apply IHn0.
+  reflexivity.
+Qed.
 
 (** $Date: 2014-12-31 11:17:56 -0500 (Wed, 31 Dec 2014) $ *)
 

@@ -257,7 +257,7 @@ Theorem plus_assoc : forall n m p : nat,
 Proof.
   intros n m p. induction n as [ | n'].
   Case "n = 0".
-    simpl. rewrite -> plus_comm.
+    simpl.
     reflexivity.
   Case "n = n'".
     simpl. rewrite -> IHn'.

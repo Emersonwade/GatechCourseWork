@@ -984,7 +984,7 @@ Fixpoint fold {X Y:Type} (f: X->Y->Y) (l:list X) (b:Y) : Y :=
    1 + (2 + (3 + (4 + 0))).
     Here are some more examples:
 *)
-
+Check fold.
 Check (fold andb).
 (* ===> fold andb : list bool -> bool -> bool *)
 

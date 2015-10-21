@@ -546,7 +546,16 @@ Proof.
 Theorem beq_nat_true : forall n m,
     beq_nat n m = true -> n = m.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros n. induction n as [|n'].
+  intros m eq. destruct m as [|m'].
+  reflexivity.
+  inversion eq.
+  intros m eq. destruct m as [|m'].
+  inversion eq.
+  simpl eq. apply IHn' in eq.
+  apply f_equal.
+  apply eq.
+Qed.
 (** [] *)
 
 (** **** Exercise: 2 stars, advanced (beq_nat_true_informal)  *)
