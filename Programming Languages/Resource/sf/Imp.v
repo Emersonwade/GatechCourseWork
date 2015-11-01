@@ -203,7 +203,8 @@ Theorem optimize_0plus_sound: forall a,
 Proof.
   intros a. induction a.
   Case "ANum". reflexivity.
-  Case "APlus". destruct a1.
+  Case "APlus". 
+    destruct a1.
     SCase "a1 = ANum n". destruct n.
       SSCase "n = 0".  simpl. apply IHa2.
       SSCase "n <> 0". simpl. rewrite IHa2. reflexivity.
