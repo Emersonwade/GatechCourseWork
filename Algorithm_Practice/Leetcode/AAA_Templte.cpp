@@ -13,9 +13,8 @@ using namespace std;
  */
 
 int main(int argc, char const *argv[])
-{
-    
-    system( "read -n 1 -s -p \"Press any key to continue...\"" );
+{   
+    //system( "read -n 1 -s -p \"Press any key to continue...\"" );
     return 0;
 }
 

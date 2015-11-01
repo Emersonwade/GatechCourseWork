@@ -80,3 +80,42 @@ int main(int argc, char const *argv[])
     system( "read -n 1 -s -p \"Press any key to continue...\"" );
     return 0;
 }
+
+/*
+在这里还需要再提一下新的DP的解法，也就是说不使用一个二维数组，而是一个一维数组进行储存。节省空间。
+想法如下：
+0 0 0
+0 0 0
+0 0 0
+每一个代表了到达(i,j)的值
+之前都是这样存储的，现在
+0 0 0
+每一位代表了到达(max_row, j)的值
+每一个都代表了到达最后一行的那一列所需要的值，然后在循环中还是每一行每一列的去循环。具体代码如下：
+
+class Solution {
+public:
+    int minPathSum(vector<vector<int>>& grid) {
+        if(grid.empty())
+            return 0;
+        int m = grid.size();
+        int n = grid[0].size();
+        
+        vector<int> pathLength(n, grid[0][0]);
+        for(int i = 1; i < n; i ++){
+            pathLength[i] = pathLength[i - 1] + grid[0][i];
+        }
+        
+        for(int i = 1; i < m; i ++){
+            for(int j = 0; j < n; j ++){
+                if(j == 0)
+                    pathLength[j] = pathLength[j] + grid[i][j];
+                else
+                    pathLength[j] = min(pathLength[j], pathLength[j - 1]) + grid[i][j];
+            }
+        }
+        
+        return pathLength[n - 1];
+    }
+};
+ */
