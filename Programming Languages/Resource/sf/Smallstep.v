@@ -966,8 +966,8 @@ Proof.
 Lemma test_multistep_2:
   C 3 ==>* C 3.
 Proof.
-  (* FILL IN HERE *) Admitted.
-(** [] *)
+  eapply multi_refl.
+Qed.
 
 (** **** Exercise: 1 star, optional (test_multistep_3)  *)
 Lemma test_multistep_3:
@@ -975,7 +975,8 @@ Lemma test_multistep_3:
    ==>*
       P (C 0) (C 3).
 Proof.
-  (* FILL IN HERE *) Admitted.
+  constructor.
+Qed.
 (** [] *)
 
 (** **** Exercise: 2 stars (test_multistep_4)  *)
@@ -990,7 +991,12 @@ Lemma test_multistep_4:
         (C 0)
         (C (2 + (0 + 3))).
 Proof.
-  (* FILL IN HERE *) Admitted.
+  econstructor. apply ST_Plus2.
+  constructor. apply ST_Plus2.
+  constructor. apply ST_PlusConstConst.
+  econstructor. apply ST_Plus2.
+  constructor. apply ST_PlusConstConst. econstructor.
+Qed.
 (** [] *)
 
 (* ########################################################### *)
@@ -1154,9 +1160,14 @@ Theorem eval__multistep : forall t n,
     you'll be able to recognize when they are useful), plus some basic
     properties of [==>*]: that it is reflexive, transitive, and
     includes [==>]. *)
-
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros. induction H. constructor.
+  apply multi_trans with (P (C n1) t2).
+  apply multistep_congr_1. assumption.
+  apply multi_trans with (P (C n1) (C n2)).
+  apply multistep_congr_2. constructor. assumption.
+  econstructor; constructor.
+Qed.
 (** [] *)
 
 (** **** Exercise: 3 stars, advanced (eval__multistep_inf)  *)
@@ -1175,7 +1186,12 @@ Lemma step__eval : forall t t' n,
      t || n.
 Proof.
   intros t t' n Hs. generalize dependent n.
-  (* FILL IN HERE *) Admitted.
+  induction Hs; intros; subst. inversion H. constructor.
+  constructor. constructor.
+  inversion H; subst. apply IHHs in H2.
+  constructor. apply H2. apply H4.
+  inversion H0; subst. constructor. apply H3. apply IHHs. apply H5.
+Qed.
 (** [] *)
 
 (** The fact that small-step reduction implies big-step is now
@@ -1190,7 +1206,16 @@ Proof.
 Theorem multistep__eval : forall t t',
   normal_form_of t t' -> exists n, t' = C n /\ t || n.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros. induction H.
+  apply nf_is_value in H0.
+  inversion H0. exists n.
+  split.
+  reflexivity.
+  tm_cases (induction H) Case; subst; intros.
+  constructor.
+  eapply step__eval.
+  apply H. apply IHmulti. auto. reflexivity.
+Qed.
 (** [] *)
 
 (* ########################################################### *)

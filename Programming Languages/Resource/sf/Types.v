@@ -47,6 +47,7 @@ Inductive tm : Type :=
   | tfalse : tm
   | tif : tm -> tm -> tm -> tm
   | tzero : tm
+  | tplus : tm-> tm -> tm
   | tsucc : tm -> tm
   | tpred : tm -> tm
   | tiszero : tm -> tm.
@@ -125,6 +126,18 @@ Inductive step : tm -> tm -> Prop :=
   | ST_Succ : forall t1 t1',
       t1 ==> t1' ->
       (tsucc t1) ==> (tsucc t1')
+  | ST_PlusZero : forall t1,
+    nvalue t1 ->
+    tplus tzero t1 ==> t1
+  |ST_PlusSucc : forall t1 t1',
+    nvalue t1 -> nvalue t1' ->
+    tplus (tsucc t1) t1' ==> tplus t1 (tsucc t1')
+  | ST_Plus : forall t0 t1 t2,
+    t0 ==> t1 ->
+    tplus t2 t0 ==> tplus t2 t1
+ | ST_Plus2: forall t0 t1 t2,
+    t0 ==> t1 ->
+    (tplus t0 t2) ==> (tplus t1 t2)
   | ST_PredZero :
       (tpred tzero) ==> tzero
   | ST_PredSucc : forall t1,
@@ -147,7 +160,8 @@ where "t1 '==>' t2" := (step t1 t2).
 Tactic Notation "step_cases" tactic(first) ident(c) :=
   first;
   [ Case_aux c "ST_IfTrue" | Case_aux c "ST_IfFalse" | Case_aux c "ST_If" 
-  | Case_aux c "ST_Succ" | Case_aux c "ST_PredZero"
+  | Case_aux c "ST_Succ" | Case_aux c "ST_PlusZero" | Case_aux c "ST_PlusSucc"
+   | Case_aux c "ST_PredZero"
   | Case_aux c "ST_PredSucc" | Case_aux c "ST_Pred" 
   | Case_aux c "ST_IszeroZero" | Case_aux c "ST_IszeroSucc"
   | Case_aux c "ST_Iszero" ].
@@ -290,6 +304,10 @@ Inductive has_type : tm -> ty -> Prop :=
   | T_Iszero : forall t1,
        |- t1 \in TNat ->
        |- tiszero t1 \in TBool
+  | T_Plus : forall t0 t1,
+       |- t0 \in TNat ->
+       |- t1 \in TNat ->
+       |- tplus t0 t1 \in TNat
 
 where "'|-' t '\in' T" := (has_type t T).
 
@@ -297,7 +315,7 @@ Tactic Notation "has_type_cases" tactic(first) ident(c) :=
   first;
   [ Case_aux c "T_True" | Case_aux c "T_False" | Case_aux c "T_If"
   | Case_aux c "T_Zero" | Case_aux c "T_Succ" | Case_aux c "T_Pred"
-  | Case_aux c "T_Iszero" ].
+  | Case_aux c "T_Iszero" | Case_aux c "T_Plus" ].
 
 Hint Constructors has_type.
 
@@ -307,7 +325,6 @@ Hint Constructors has_type.
 (** It's important to realize that the typing relation is a
     _conservative_ (or _static_) approximation: it does not calculate
     the type of the normal form of a term. *)
-
 Example has_type_1 : 
   |- tif tfalse tzero (tsucc tzero) \in TNat.
 Proof. 
@@ -366,7 +383,6 @@ Qed.
 
 (** The typing relation enjoys two critical properties.  The first is
     that well-typed normal forms are values (i.e., not stuck). *)
-
 Theorem progress : forall t T,
   |- t \in T ->
   value t \/ exists t', t ==> t'.
@@ -391,7 +407,51 @@ Proof with auto.
     SCase "t1 can take a step".
       inversion H as [t1' H1].
       exists (tif t1' t2 t3)...
-  (* FILL IN HERE *) Admitted.
+  Case "T_Succ". inversion IHHT.
+    SCase "t1 is a value". inversion H; clear H.
+      SSCase "t1 is a bvalue". solve by inversion 2.
+      SSCase "t1 is a nvalue". left...
+    SCase "t1 can take a step".
+     right. inversion H as [t' H']. exists (tsucc t')...
+  Case "T_Pred". inversion IHHT.
+    SCase "t1 is a value". inversion H; clear H.
+      SSCase "t1 is a bvalue". solve by inversion 2.
+      SSCase "t1 is a nvalue". right. inversion H0; eauto.
+    SCase "t1 can take a step".
+      right. inversion H as [t' H']. exists (tpred t')...
+  Case "T_Iszero". right. inversion IHHT.
+    SCase "t1 is a value". inversion H; clear H.
+      SSCase "t1 is a bvalue". solve by inversion 2.
+      SSCase "t1 is a nvalue". inversion H0.
+        SSSCase "t1 is tzero". exists ttrue...
+        SSSCase "t1 is tsucc t". exists tfalse...
+    SCase "t1 can take a step".
+      inversion H as [t' H']. exists (tiszero t')...
+  Case "T_Plus".
+      inversion IHHT1.
+      SCase "t0 is a value". inversion H; clear H.
+        SSCase "t0 is a bvalue". solve by inversion 2.
+        SSCase "t0 is a nvalue". inversion H0.
+          SSSCase "t0 is tzero". 
+            inversion IHHT2.
+            SSSSCase "t1 is a value". inversion H1; clear H1.
+              SSSSSCase "t1 is a bvalue". solve by inversion 2.
+              SSSSSCase "t1 is a nvalue". inversion H2.
+                SSSSSSCase "t1 is tzero". right. exists tzero...
+                SSSSSSCase "t1 is tsucc t". right. rewrite H3. exists t1...
+           SSSSCase "t1 can take a step".
+             inversion H1 as [t' H1']. right. exists (tplus tzero t')...
+        SSSCase "t0 is not tzero". right.
+          inversion IHHT2.
+          SSSSCase "t1 is a value". inversion H2; clear H1. assert (nvalue t1).
+          apply nat_canonical. assumption. assumption.
+          exists (tplus t (tsucc t1)). constructor. assumption. assumption.
+          exists (tplus t (tsucc t1)). constructor. assumption. assumption.
+          SSSSCase "t1 can take a step".
+            inversion H2 as [t' H1']. exists (tplus (tsucc t) t')...
+   SCase "t1 can take a step". right. 
+            inversion H as [t' H']. exists (tplus t' t1)...
+Qed.
 (** [] *)
 
 (** **** Exercise: 3 stars, advanced (finish_progress_informal)  *)
@@ -476,7 +536,20 @@ Proof with auto.
       SCase "ST_IfFalse". assumption.
       SCase "ST_If". apply T_If; try assumption.
         apply IHHT1; assumption.
-    (* FILL IN HERE *) Admitted.
+       Case "T_Succ".
+      inversion HE; subst...
+    Case "T_Pred".
+      inversion HE; subst...
+      assert (forall t, nvalue t -> has_type t TNat).
+        intros. induction H. constructor.
+        constructor. apply IHnvalue.
+      apply H...
+    Case "T_Iszero".
+      inversion HE; subst...
+    Case "T_Plus".
+      inversion HE; subst... constructor. inversion HT1; subst...
+      constructor. assumption.
+Qed.
 (** [] *)
 
 (** **** Exercise: 3 stars, advanced (finish_preservation_informal)  *)

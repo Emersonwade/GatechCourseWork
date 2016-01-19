@@ -385,9 +385,30 @@ where "'[' x ':=' s ']' t" := (subst x s t).
     constructors. *)
 
 Inductive substi (s:tm) (x:id) : tm -> tm -> Prop := 
-  | s_var1 : 
+  | s_var1 :
       substi s x (tvar x) s
-  (* FILL IN HERE *)
+  | s_var2 : 
+      forall y:id, x <> y -> substi s x (tvar y) (tvar y)
+  | s_abs1 : 
+      forall T t, substi s x (tabs x T t) (tabs x T t)
+  | s_abs2 : 
+      forall y T t t',
+      x <> y ->
+      substi s x t t' ->
+      substi s x (tabs y T t) (tabs y T t')
+  | s_app : 
+      forall t1 t2 t1' t2',
+      substi s x t1 t1' ->
+      substi s x t2 t2' ->
+      substi s x (tapp t1 t2) (tapp t1' t2')
+  | s_true : substi s x ttrue ttrue
+  | s_false : substi s x tfalse tfalse
+  | s_if : 
+      forall t1 t1' t2 t2' t3 t3',
+      substi s x t1 t1' ->
+      substi s x t2 t2' ->
+      substi s x t3 t3' ->
+      substi s x (tif t1 t2 t3) (tif t1' t2' t3')
 .
 
 Hint Constructors substi.
@@ -395,7 +416,42 @@ Hint Constructors substi.
 Theorem substi_correct : forall s x t t',
   [x:=s]t = t' <-> substi s x t t'.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros s x t t'. split.
+  Case "->". generalize dependent t'.
+  t_cases (induction t) SCase; intros.
+  SCase "tvar". unfold subst in H. destruct (eq_id_dec x i); subst.
+    apply s_var1. apply s_var2. assumption.
+  SCase "tapp".
+    replace ([x := s]tapp t1 t2) with (tapp ([x := s]t1) ([x := s] t2)) in H by reflexivity.
+    rewrite <- H. constructor. apply IHt1. reflexivity. apply IHt2. reflexivity.
+  SCase "tabs".
+    unfold subst in H.
+    destruct (eq_id_dec x i).
+      SSCase "x=i". rewrite <- H. subst. constructor.
+      SSCase "x<>i". fold subst in H. rewrite <- H. constructor. assumption. apply IHt. reflexivity.
+  SCase "ttrue".
+    simpl in H. rewrite <- H. constructor.
+  SCase "tfalse".
+    simpl in H. rewrite <- H. constructor.
+  SCase "tif".
+    rewrite <- H. replace ([x := s]tif t1 t2 t3) with (tif ([x := s]t1) ([x := s]t2) ([x := s]t3)) by reflexivity.
+    constructor. auto. auto. auto.
+  Case "<-". generalize dependent t'.
+    t_cases (induction t) SCase; intros.
+    SCase "tvar". inversion H; subst; unfold subst.
+      SSCase "x=i". destruct (eq_id_dec i i). reflexivity. apply ex_falso_quodlibet. apply n. reflexivity.
+      SSCase "x<>i". destruct (eq_id_dec x i). unfold not in H1. apply H1 in e. inversion e. reflexivity.
+    SCase "tapp". inversion H; subst; clear H. apply IHt1 in H2. apply IHt2 in H4.
+      replace ([x := s]tapp t1 t2) with (tapp ([x := s]t1) ([x := s]t2)) by reflexivity. rewrite H2. rewrite H4. reflexivity.
+    SCase "tabs". inversion H; subst. 
+      SSCase "i=i". unfold subst. destruct (eq_id_dec i i). reflexivity. contradiction n. reflexivity.
+      SSCase "x<>i". unfold subst. destruct (eq_id_dec x i). apply H4 in e. inversion e. fold subst. apply IHt in H5. rewrite H5. reflexivity.
+    SCase "ttrue". inversion H. reflexivity.
+    SCase "tfalse". inversion H. reflexivity.
+    SCase "tif". inversion H; subst. apply IHt1 in H3. apply IHt2 in H5. apply IHt3 in H6.
+      replace ([x := s]tif t1 t2 t3) with (tif ([x := s]t1) ([x := s]t2) ([x := s]t3)) by reflexivity.
+      rewrite H3. rewrite H5. rewrite H6. reflexivity.
+Qed.
 (** [] *)
 
 (* ################################### *)
