@@ -4,47 +4,90 @@
 #include <vector>
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <unordered_map> 
 using namespace std;
 
 /*
 
  */
 
-int main(int argc, char const *argv[])
-{   
-    string s = "s    ";
-    vector<string> result;
-    string resultStr = "";
-    string oneStr = "";
-    for (int i = 0; i < s.length(); i++) {
-        if (s[i] != ' ') {
-            oneStr += s[i];
-        } else {
-            if (oneStr != "") {
-                result.push_back(oneStr);
-            }            
-            oneStr = "";
+class TrieNode {
+public:
+    char c;
+    unordered_map<char, TrieNode> children;
+    bool isWord;
+    TrieNode() {
+        isWord = false;
+    }
+    TrieNode(char _c) {
+        c = _c;
+        isWord = false;
+    }
+};
+
+class WordDictionary {
+public:
+    TrieNode root;
+    WordDictionary() {
+    }
+    
+    // Adds a word into the data structure.
+    void addWord(string word) {
+        // Write your code here
+        TrieNode curtNode = root;
+        for (int i = 0; i < word.length(); i++) {
+            if (curtNode.children.find(word[i]) == curtNode.children.end()) {
+                TrieNode node(word[i]);
+                curtNode.children[word[i]] = node;
+                curtNode = node;
+            } else {
+                curtNode = curtNode.children[word[i]];
+            }
+            if (i == word.length() - 1) {
+                curtNode.isWord = true;
+            }
         }
     }
-    if (oneStr != "") {
-        result.push_back(oneStr);
-    }
 
-    for (int i = result.size() - 1; i >= 0; i--) {
-        //cout << result[i] << endl;
-        resultStr += result[i];
-        if (i != 0) {
-            resultStr += " ";
+    // Returns if the word is in the data structure. A word could
+    // contain the dot character '.' to represent any one letter.
+    bool search(string word) {
+        // Write your code here
+        TrieNode curtNode = root;
+    }
+    
+    bool searchHelper(string word, TrieNode searchNode) {
+        if (word.length() == 1) {
+            if (searchNode.c == word[0] && searchNode.isWord) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        
+        for (int i = 0; i < word.length(); i++) {
+            if (word[i] != '.') {
+                if (searchNode.children.find(word[i]) == searchNode.children.end()) {
+                    return false;
+                } else {
+                    return searchHelper(word.substr(1, word.length() - 1), searchNode.children[word[i]]);
+                }    
+            } else {
+                bool result = false;
+                for (auto it = searchNode.children.begin(); 
+                    it != searchNode.children.end(); it++) {
+                    result = result || searchHelper(word.substr(1, word.length() - 1), it->second);
+                }
+                return result;
+            }
         }
     }
+};
 
-    //cout << resultStr << endl;
-    s = resultStr;
-    cout << s << endl;
-    system( "read -n 1 -s -p \"Press any key to continue...\"" );
-    return 0;
-}
+// Your WordDictionary object will be instantiated and called as such:
+// WordDictionary wordDictionary;
+// wordDictionary.addWord("word");
+// wordDictionary.search("pattern");
 
 /*
 
