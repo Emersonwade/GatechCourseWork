@@ -1,0 +1,59 @@
+# File
+  Size:
+      Empty.                [single][property emptyfile] 
+      Not empty.
+  Number of occurrences of the string from case insensitive in the file:
+      None.                 [single][if !emptyfile][property noOccurencesInCase]
+      One.                  [single][if !emptyfile]
+      Many.                 [if !emptyfile]
+  Number of occurrences of the string from case sensitive in the file:
+      None.                 [single][if !emptyfile && !noOccurencesInCase][property noOccurencesCase]
+      One.                  [single][if !emptyfile]
+      Many.                 [if !emptyfile]
+  Position of the string from in the file:
+      First line.           [single][if !emptyfile]
+      Last line.            [single][if !emptyfile]
+      Any.                  [if !emptyfile]
+
+# OPT
+  Option:
+      Backup.               [property backup]
+      First occurrence.     [property fOccurrence]
+      Last occurrence.      [property lOccurrence]
+      Case insensitive.     [property caseInsensitive]
+      Replace first and last occurrence.  [error][property flOccurrence]
+      MultiOption.          [if !flOccurrence][property multiOption]
+      No option.            [property noOption]
+
+# Replace String From and String To:
+  Length of the String From:
+      Empty.                [single][property emptyStringFrom]
+      One.                  [single]
+      More than one.        [property stringFromLengthgt1]
+      Longer than the file. [error]
+  Length of the String To:
+      Empty.                [single][property emptyStringTo]
+      One.                  [single]
+      More than one.        [property stringToLengthgt1]
+  Content of the String From:
+      Alphanumeric characters.  [if !emptyStringFrom && !emptyStringTo]
+      Special characters.       [if !emptyStringFrom && !emptyStringTo]
+      Spaces.                   [single][if !emptyStringFrom && !emptyStringTo]
+      Mutli-type characters.    [if !emptyStringFrom && !emptyStringTo]
+  Content of the String To:
+      Alphanumeric characters.  [if !emptyStringTo && !emptyStringFrom]
+      Special characters.       [if !emptyStringTo && !emptyStringFrom]
+      Spaces.                   [if !emptyStringTo && !emptyStringFrom]
+      Mutli-type characters.    [if !emptyStringTo && !emptyStringFrom]
+
+# Filename
+  Number of Filename:
+      None.                 [error]
+      One.                  [single]
+      More than one.        [property numberFilenamegt1]
+  Duplicate Filename Entered:
+      None.                 [if numberFilenamegt1]
+      Duplicate filename.   [single][if numberFilenamegt1]
+  Presence of a file corresponding to the name:
+      Not present.          [error]
+      Present.              

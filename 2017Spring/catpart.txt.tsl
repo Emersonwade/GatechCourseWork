@@ -1,0 +1,1152 @@
+
+Test Case 1  		<single>
+   Size :  Empty
+
+
+Test Case 2  		<single>
+   Number of occurrences of the string from case insensitive in the file :  None
+
+
+Test Case 3  		<single>
+   Number of occurrences of the string from case insensitive in the file :  One
+
+
+Test Case 4  		<single>
+   Number of occurrences of the string from case sensitive in the file :  None
+
+
+Test Case 5  		<single>
+   Number of occurrences of the string from case sensitive in the file :  One
+
+
+Test Case 6  		<single>
+   Position of the string from in the file :  First line
+
+
+Test Case 7  		<single>
+   Position of the string from in the file :  Last line
+
+
+Test Case 8  		<error>
+   Option :  Replace first and last occurrence
+
+
+Test Case 9  		<single>
+   Length of the String From :  Empty
+
+
+Test Case 10 		<single>
+   Length of the String From :  One
+
+
+Test Case 11 		<error>
+   Length of the String From :  Longer than the file
+
+
+Test Case 12 		<single>
+   Length of the String To :  Empty
+
+
+Test Case 13 		<single>
+   Length of the String To :  One
+
+
+Test Case 14 		<single>
+   Content of the String From :  Spaces
+
+
+Test Case 15 		<error>
+   Number of Filename :  None
+
+
+Test Case 16 		<single>
+   Number of Filename :  One
+
+
+Test Case 17 		<single>
+   Duplicate Filename Entered :  Duplicate filename
+
+
+Test Case 18 		<error>
+   Presence of a file corresponding to the name :  Not present
+
+
+Test Case 19 		(Key = 2.3.3.3.1.3.3.1.1.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  Backup
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Alphanumeric characters
+   Content of the String To                                              :  Alphanumeric characters
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 20 		(Key = 2.3.3.3.1.3.3.1.2.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  Backup
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Alphanumeric characters
+   Content of the String To                                              :  Special characters
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 21 		(Key = 2.3.3.3.1.3.3.1.3.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  Backup
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Alphanumeric characters
+   Content of the String To                                              :  Spaces
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 22 		(Key = 2.3.3.3.1.3.3.1.4.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  Backup
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Alphanumeric characters
+   Content of the String To                                              :  Mutli-type characters
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 23 		(Key = 2.3.3.3.1.3.3.2.1.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  Backup
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Special characters
+   Content of the String To                                              :  Alphanumeric characters
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 24 		(Key = 2.3.3.3.1.3.3.2.2.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  Backup
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Special characters
+   Content of the String To                                              :  Special characters
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 25 		(Key = 2.3.3.3.1.3.3.2.3.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  Backup
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Special characters
+   Content of the String To                                              :  Spaces
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 26 		(Key = 2.3.3.3.1.3.3.2.4.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  Backup
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Special characters
+   Content of the String To                                              :  Mutli-type characters
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 27 		(Key = 2.3.3.3.1.3.3.4.1.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  Backup
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Mutli-type characters
+   Content of the String To                                              :  Alphanumeric characters
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 28 		(Key = 2.3.3.3.1.3.3.4.2.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  Backup
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Mutli-type characters
+   Content of the String To                                              :  Special characters
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 29 		(Key = 2.3.3.3.1.3.3.4.3.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  Backup
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Mutli-type characters
+   Content of the String To                                              :  Spaces
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 30 		(Key = 2.3.3.3.1.3.3.4.4.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  Backup
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Mutli-type characters
+   Content of the String To                                              :  Mutli-type characters
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 31 		(Key = 2.3.3.3.2.3.3.1.1.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  First occurrence
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Alphanumeric characters
+   Content of the String To                                              :  Alphanumeric characters
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 32 		(Key = 2.3.3.3.2.3.3.1.2.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  First occurrence
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Alphanumeric characters
+   Content of the String To                                              :  Special characters
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 33 		(Key = 2.3.3.3.2.3.3.1.3.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  First occurrence
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Alphanumeric characters
+   Content of the String To                                              :  Spaces
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 34 		(Key = 2.3.3.3.2.3.3.1.4.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  First occurrence
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Alphanumeric characters
+   Content of the String To                                              :  Mutli-type characters
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 35 		(Key = 2.3.3.3.2.3.3.2.1.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  First occurrence
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Special characters
+   Content of the String To                                              :  Alphanumeric characters
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 36 		(Key = 2.3.3.3.2.3.3.2.2.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  First occurrence
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Special characters
+   Content of the String To                                              :  Special characters
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 37 		(Key = 2.3.3.3.2.3.3.2.3.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  First occurrence
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Special characters
+   Content of the String To                                              :  Spaces
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 38 		(Key = 2.3.3.3.2.3.3.2.4.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  First occurrence
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Special characters
+   Content of the String To                                              :  Mutli-type characters
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 39 		(Key = 2.3.3.3.2.3.3.4.1.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  First occurrence
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Mutli-type characters
+   Content of the String To                                              :  Alphanumeric characters
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 40 		(Key = 2.3.3.3.2.3.3.4.2.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  First occurrence
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Mutli-type characters
+   Content of the String To                                              :  Special characters
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 41 		(Key = 2.3.3.3.2.3.3.4.3.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  First occurrence
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Mutli-type characters
+   Content of the String To                                              :  Spaces
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 42 		(Key = 2.3.3.3.2.3.3.4.4.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  First occurrence
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Mutli-type characters
+   Content of the String To                                              :  Mutli-type characters
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 43 		(Key = 2.3.3.3.3.3.3.1.1.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  Last occurrence
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Alphanumeric characters
+   Content of the String To                                              :  Alphanumeric characters
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 44 		(Key = 2.3.3.3.3.3.3.1.2.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  Last occurrence
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Alphanumeric characters
+   Content of the String To                                              :  Special characters
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 45 		(Key = 2.3.3.3.3.3.3.1.3.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  Last occurrence
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Alphanumeric characters
+   Content of the String To                                              :  Spaces
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 46 		(Key = 2.3.3.3.3.3.3.1.4.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  Last occurrence
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Alphanumeric characters
+   Content of the String To                                              :  Mutli-type characters
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 47 		(Key = 2.3.3.3.3.3.3.2.1.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  Last occurrence
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Special characters
+   Content of the String To                                              :  Alphanumeric characters
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 48 		(Key = 2.3.3.3.3.3.3.2.2.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  Last occurrence
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Special characters
+   Content of the String To                                              :  Special characters
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 49 		(Key = 2.3.3.3.3.3.3.2.3.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  Last occurrence
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Special characters
+   Content of the String To                                              :  Spaces
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 50 		(Key = 2.3.3.3.3.3.3.2.4.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  Last occurrence
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Special characters
+   Content of the String To                                              :  Mutli-type characters
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 51 		(Key = 2.3.3.3.3.3.3.4.1.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  Last occurrence
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Mutli-type characters
+   Content of the String To                                              :  Alphanumeric characters
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 52 		(Key = 2.3.3.3.3.3.3.4.2.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  Last occurrence
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Mutli-type characters
+   Content of the String To                                              :  Special characters
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 53 		(Key = 2.3.3.3.3.3.3.4.3.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  Last occurrence
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Mutli-type characters
+   Content of the String To                                              :  Spaces
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 54 		(Key = 2.3.3.3.3.3.3.4.4.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  Last occurrence
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Mutli-type characters
+   Content of the String To                                              :  Mutli-type characters
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 55 		(Key = 2.3.3.3.4.3.3.1.1.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  Case insensitive
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Alphanumeric characters
+   Content of the String To                                              :  Alphanumeric characters
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 56 		(Key = 2.3.3.3.4.3.3.1.2.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  Case insensitive
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Alphanumeric characters
+   Content of the String To                                              :  Special characters
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 57 		(Key = 2.3.3.3.4.3.3.1.3.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  Case insensitive
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Alphanumeric characters
+   Content of the String To                                              :  Spaces
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 58 		(Key = 2.3.3.3.4.3.3.1.4.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  Case insensitive
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Alphanumeric characters
+   Content of the String To                                              :  Mutli-type characters
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 59 		(Key = 2.3.3.3.4.3.3.2.1.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  Case insensitive
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Special characters
+   Content of the String To                                              :  Alphanumeric characters
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 60 		(Key = 2.3.3.3.4.3.3.2.2.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  Case insensitive
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Special characters
+   Content of the String To                                              :  Special characters
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 61 		(Key = 2.3.3.3.4.3.3.2.3.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  Case insensitive
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Special characters
+   Content of the String To                                              :  Spaces
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 62 		(Key = 2.3.3.3.4.3.3.2.4.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  Case insensitive
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Special characters
+   Content of the String To                                              :  Mutli-type characters
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 63 		(Key = 2.3.3.3.4.3.3.4.1.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  Case insensitive
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Mutli-type characters
+   Content of the String To                                              :  Alphanumeric characters
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 64 		(Key = 2.3.3.3.4.3.3.4.2.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  Case insensitive
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Mutli-type characters
+   Content of the String To                                              :  Special characters
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 65 		(Key = 2.3.3.3.4.3.3.4.3.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  Case insensitive
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Mutli-type characters
+   Content of the String To                                              :  Spaces
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 66 		(Key = 2.3.3.3.4.3.3.4.4.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  Case insensitive
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Mutli-type characters
+   Content of the String To                                              :  Mutli-type characters
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 67 		(Key = 2.3.3.3.6.3.3.1.1.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  MultiOption
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Alphanumeric characters
+   Content of the String To                                              :  Alphanumeric characters
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 68 		(Key = 2.3.3.3.6.3.3.1.2.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  MultiOption
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Alphanumeric characters
+   Content of the String To                                              :  Special characters
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 69 		(Key = 2.3.3.3.6.3.3.1.3.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  MultiOption
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Alphanumeric characters
+   Content of the String To                                              :  Spaces
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 70 		(Key = 2.3.3.3.6.3.3.1.4.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  MultiOption
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Alphanumeric characters
+   Content of the String To                                              :  Mutli-type characters
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 71 		(Key = 2.3.3.3.6.3.3.2.1.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  MultiOption
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Special characters
+   Content of the String To                                              :  Alphanumeric characters
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 72 		(Key = 2.3.3.3.6.3.3.2.2.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  MultiOption
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Special characters
+   Content of the String To                                              :  Special characters
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 73 		(Key = 2.3.3.3.6.3.3.2.3.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  MultiOption
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Special characters
+   Content of the String To                                              :  Spaces
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 74 		(Key = 2.3.3.3.6.3.3.2.4.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  MultiOption
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Special characters
+   Content of the String To                                              :  Mutli-type characters
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 75 		(Key = 2.3.3.3.6.3.3.4.1.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  MultiOption
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Mutli-type characters
+   Content of the String To                                              :  Alphanumeric characters
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 76 		(Key = 2.3.3.3.6.3.3.4.2.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  MultiOption
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Mutli-type characters
+   Content of the String To                                              :  Special characters
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 77 		(Key = 2.3.3.3.6.3.3.4.3.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  MultiOption
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Mutli-type characters
+   Content of the String To                                              :  Spaces
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 78 		(Key = 2.3.3.3.6.3.3.4.4.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  MultiOption
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Mutli-type characters
+   Content of the String To                                              :  Mutli-type characters
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 79 		(Key = 2.3.3.3.7.3.3.1.1.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  No option
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Alphanumeric characters
+   Content of the String To                                              :  Alphanumeric characters
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 80 		(Key = 2.3.3.3.7.3.3.1.2.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  No option
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Alphanumeric characters
+   Content of the String To                                              :  Special characters
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 81 		(Key = 2.3.3.3.7.3.3.1.3.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  No option
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Alphanumeric characters
+   Content of the String To                                              :  Spaces
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 82 		(Key = 2.3.3.3.7.3.3.1.4.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  No option
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Alphanumeric characters
+   Content of the String To                                              :  Mutli-type characters
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 83 		(Key = 2.3.3.3.7.3.3.2.1.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  No option
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Special characters
+   Content of the String To                                              :  Alphanumeric characters
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 84 		(Key = 2.3.3.3.7.3.3.2.2.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  No option
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Special characters
+   Content of the String To                                              :  Special characters
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 85 		(Key = 2.3.3.3.7.3.3.2.3.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  No option
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Special characters
+   Content of the String To                                              :  Spaces
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 86 		(Key = 2.3.3.3.7.3.3.2.4.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  No option
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Special characters
+   Content of the String To                                              :  Mutli-type characters
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 87 		(Key = 2.3.3.3.7.3.3.4.1.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  No option
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Mutli-type characters
+   Content of the String To                                              :  Alphanumeric characters
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 88 		(Key = 2.3.3.3.7.3.3.4.2.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  No option
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Mutli-type characters
+   Content of the String To                                              :  Special characters
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 89 		(Key = 2.3.3.3.7.3.3.4.3.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  No option
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Mutli-type characters
+   Content of the String To                                              :  Spaces
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
+
+Test Case 90 		(Key = 2.3.3.3.7.3.3.4.4.3.1.2.)
+   Size                                                                  :  Not empty
+   Number of occurrences of the string from case insensitive in the file :  Many
+   Number of occurrences of the string from case sensitive in the file   :  Many
+   Position of the string from in the file                               :  Any
+   Option                                                                :  No option
+   Length of the String From                                             :  More than one
+   Length of the String To                                               :  More than one
+   Content of the String From                                            :  Mutli-type characters
+   Content of the String To                                              :  Mutli-type characters
+   Number of Filename                                                    :  More than one
+   Duplicate Filename Entered                                            :  None
+   Presence of a file corresponding to the name                          :  Present
+
